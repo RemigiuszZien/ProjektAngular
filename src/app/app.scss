@@ -1,0 +1,21 @@
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+app-sidebar, .sidenav {
+  position: relative; 
+  height: auto;
+  width: var(--sidebar-width);
+  flex: 0 0 var(--sidebar-width);
+  transition: width var(--transition) ease;
+}
+
+.app-content {
+  flex: 1 1 auto;
+}
+
+app-sidebar.sidenav-collapsed, .sidenav.sidenav-collapsed {
+  width: var(--sidebar-collapsed-width) !important;
+  flex: 0 0 var(--sidebar-collapsed-width);
+}
