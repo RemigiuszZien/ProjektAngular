@@ -18,13 +18,13 @@ export class Sidebar {
     return this.collapsed();
   }
 
-   collapsed = signal(false);
+   collapsed = signal(true);
 
   items = [
-    { routeLink: '/link1', label: 'link1' },
-    { routeLink: '/link2', label: 'link2' },
-    { routeLink: '/link3', label: 'link3' },
-    { routeLink: '/link4', label: 'link4' },
+    { routeLink: '/link1', label: 'link1', icon: '🏠' },
+    { routeLink: '/link2', label: 'link2', icon: '📄' },
+    { routeLink: '/link3', label: 'link3', icon: '📊' },
+    { routeLink: '/link4', label: 'link4', icon: '⚙️' },
   ];
 
   toggle(): void {

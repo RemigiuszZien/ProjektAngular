@@ -11,11 +11,13 @@
         routerLinkActive="active"
         [routerLinkActiveOptions]="{ exact: true }"
         role="menuitem"
-        title="{{ item.label }}"
+        [title]="item.label"
       >
-        <span class="sidenav-link-text">
-          {{ item.label }}
-        </span>
+        @if (collapsed()) {
+          <span class="sidenav-link-icon">{{ item.icon }}</span>
+        } @else {
+          <span class="sidenav-link-text">{{ item.label }}</span>
+        }
       </a>
     </li>
   </ul>

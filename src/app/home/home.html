@@ -1,1 +1,62 @@
-<p>home works!</p>
+<div class="container my-4">
+  <div #carouselRoot id="homeCarousel" class="carousel slide" aria-label="Home carousel">
+    <div class="carousel-indicators">
+      @for (slide of slides; track slide.id; let i = $index) {
+        <button
+          type="button"
+          data-bs-target="#homeCarousel"
+          [attr.data-bs-slide-to]="i"
+          [class.active]="$first"
+          [attr.aria-current]="$first ? 'true' : null"
+          [attr.aria-label]="'Slide ' + (i + 1)">
+        </button>
+      }
+    </div>
+
+    <div class="carousel-inner">
+      @for (slide of slides; track slide.id; let i = $index) {
+        <div class="carousel-item" [class.active]="$first">
+          <img [src]="slide.image" class="d-block w-100" [alt]="slide.title || ('slide ' + (i + 1))">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>{{ slide.title }}</h5>
+            <p>{{ slide.text }}</p>
+            <button class="btn btn-primary btn-sm mt-2" (click)="showBuilds(slide)">Pokaż buildy</button>
+          </div>
+        </div>
+      } 
+    </div>
+
+    <button class="carousel-control-prev" type="button" (click)="prev()">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" (click)="next()">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+@if (selectedSlide?.items; as items) {
+  <div class="modal-backdrop show">
+    <div class="modal d-block" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Popularne Buildy: {{ selectedSlide?.title }}</h5>
+            <button type="button" class="btn-close" aria-label="Zamknij" (click)="closeBuilds()"></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              @for (item of items; track item) {
+                <li>{{ item }}</li>
+              } 
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" (click)="closeBuilds()">Zamknij</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}

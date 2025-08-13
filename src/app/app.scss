@@ -19,3 +19,6 @@ app-sidebar.sidenav-collapsed, .sidenav.sidenav-collapsed {
   width: var(--sidebar-collapsed-width) !important;
   flex: 0 0 var(--sidebar-collapsed-width);
 }
+body {
+  background: linear-gradient(135deg, #e0e7ff 0%, #f0f4ff 50%, #e0ecff 100%);
+}
