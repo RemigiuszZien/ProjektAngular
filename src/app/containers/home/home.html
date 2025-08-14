@@ -1,0 +1,39 @@
+<app-carousel
+  [slides]="slides"
+  (showBuilds)="showBuilds($event)"
+  [showBuildsLabel]="'Pokaż buildy'"
+></app-carousel>
+
+@if (selectedSlide?.items; as items) {
+  <div class="modal-backdrop show">
+    <div class="modal d-block" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              Popularne Buildy: {{ selectedSlide?.title }}
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              aria-label="Zamknij"
+              (click)="closeBuilds()"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              @for (item of items; track item) {
+                <li>{{ item }}</li>
+              }
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" (click)="closeBuilds()">
+              Zamknij
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}

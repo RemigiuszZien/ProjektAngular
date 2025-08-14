@@ -18,24 +18,16 @@ export class Sidebar {
     return this.collapsed();
   }
 
-   collapsed = signal(true);
+  collapsed = signal(true);
 
-  items = [
+  items = signal([
     { routeLink: '/link1', label: 'link1', icon: '🏠' },
     { routeLink: '/link2', label: 'link2', icon: '📄' },
     { routeLink: '/link3', label: 'link3', icon: '📊' },
     { routeLink: '/link4', label: 'link4', icon: '⚙️' },
-  ];
+  ]);
 
   toggle(): void {
     this.collapsed.update(c => !c);
-  }
-
-  close(): void {
-    this.collapsed.set(true);
-  }
-
-  open(): void {
-    this.collapsed.set(false);
   }
 }
