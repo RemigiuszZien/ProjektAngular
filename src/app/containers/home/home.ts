@@ -1,11 +1,13 @@
 import { Component } from '@angular/core';
 import { Carousel } from '../../shared/components/carousel/carousel';
 import { Slide } from '../../shared/interfaces/slide';
+import { Build } from '../../shared/interfaces/build';
+import { Build as BuildComponent } from '../../shared/components/build/build';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [Carousel],
+  imports: [Carousel, BuildComponent],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })
@@ -17,9 +19,16 @@ export class Home {
       title: 'Marauder',
       text: 'Berserker, Chieftain, Juggernaut',
       items: [
-        'Cast when Stunned autobomber Chieftain',
-        'Blade Vortex Juggernaut',
-        'Volcanic Fissure of Snaking Berserker',
+        {
+          name: 'Cast when Stunned autobomber Chieftain',
+          equipment: 'Hełm z Runami, Zbroja Wojownika, Młot Gromu',
+          skills: 'Cast when Stunned, Molten Shell, Enduring Cry',
+        },
+        {
+          name: 'Blade Vortex Juggernaut',
+          equipment: 'Placeholder Hełm, Placeholder Zbroja, Placeholder Broń',
+          skills: 'Placeholder Skill 1, Placeholder Skill 2',
+        },
       ],
     },
     {
@@ -28,9 +37,16 @@ export class Home {
       title: 'Witch',
       text: 'Occultist, Elementalist, Necromancer',
       items: [
-        'Raise Spectre Necromancer',
-        'Summon Raging Spirits Necromancer',
-        'Blade Vortex Elementalist',
+        {
+          name: 'Raise Spectre Necromancer',
+          equipment: 'Spectre Helm, Necro Robe, Wand',
+          skills: 'Raise Spectre, Summon Skeletons',
+        },
+        {
+          name: 'Summon Raging Spirits Necromancer',
+          equipment: 'Placeholder Hełm, Placeholder Zbroja, Placeholder Broń',
+          skills: 'Placeholder Skill 1, Placeholder Skill 2',
+        },
       ],
     },
     {
@@ -39,9 +55,16 @@ export class Home {
       title: 'Templar',
       text: 'Hierophant, Guardian, Inquisitor',
       items: [
-        'Archmage Hierophant',
-        'Penance Brand of Disipation Inquisitor',
-        'Summon Holy Relic Guardian',
+        {
+          name: 'Archmage Hierophant',
+          equipment: 'Placeholder Hełm, Placeholder Zbroja, Placeholder Broń',
+          skills: 'Placeholder Skill 1, Placeholder Skill 2',
+        },
+        {
+          name: 'Penance Brand of Dissipation Inquisitor',
+          equipment: 'Placeholder Hełm, Placeholder Zbroja, Placeholder Broń',
+          skills: 'Placeholder Skill 1, Placeholder Skill 2',
+        },
       ],
     },
     {
@@ -50,10 +73,16 @@ export class Home {
       title: 'Shadow',
       text: 'Trickster, Saboteur, Assassin',
       items: [
-        'Lightning Strike Trickster',
-        'Smite of Judgement Trickster',
-        'Hexblast mines Sabouteur',
-        'Penance Brand of Disipation Assassin/Trickster',
+        {
+          name: 'Lightning Strike Trickster',
+          equipment: 'Placeholder Hełm, Placeholder Zbroja, Placeholder Broń',
+          skills: 'Placeholder Skill 1, Placeholder Skill 2',
+        },
+        {
+          name: 'Hexblast Mines Saboteur',
+          equipment: 'Placeholder Hełm, Placeholder Zbroja, Placeholder Broń',
+          skills: 'Placeholder Skill 1, Placeholder Skill 2',
+        },
       ],
     },
     {
@@ -62,9 +91,16 @@ export class Home {
       title: 'Scion',
       text: 'Ascendant',
       items: [
-        'Aurabot Ascendant',
-        'Merc carry Ascendant',
-        'Power Siphone mines Ascendant',
+        {
+          name: 'Aurabot Ascendant',
+          equipment: 'Placeholder Hełm, Placeholder Zbroja, Placeholder Broń',
+          skills: 'Placeholder Skill 1, Placeholder Skill 2',
+        },
+        {
+          name: 'Merc Carry Ascendant',
+          equipment: 'Placeholder Hełm, Placeholder Zbroja, Placeholder Broń',
+          skills: 'Placeholder Skill 1, Placeholder Skill 2',
+        },
       ],
     },
     {
@@ -73,10 +109,16 @@ export class Home {
       title: 'Ranger',
       text: 'Deadeye, Pathfinder, Warden',
       items: [
-        'Viper Strike of Mamba Pathfinder',
-        'Blade Vortex Pathfinder',
-        'Tornado Shot Warden',
-        'Kinetic Blast Deadeye',
+        {
+          name: 'Viper Strike of Mamba Pathfinder',
+          equipment: 'Placeholder Hełm, Placeholder Zbroja, Placeholder Broń',
+          skills: 'Placeholder Skill 1, Placeholder Skill 2',
+        },
+        {
+          name: 'Tornado Shot Warden',
+          equipment: 'Placeholder Hełm, Placeholder Zbroja, Placeholder Broń',
+          skills: 'Placeholder Skill 1, Placeholder Skill 2',
+        },
       ],
     },
     {
@@ -84,16 +126,34 @@ export class Home {
       image: 'https://picsum.photos/1200/500?random=7',
       title: 'Duelist',
       text: 'Slayer, Champion, Gladiator',
-      items: ['Smite Slayer', 'Lacerate Gladiator', 'Splitting Steel Champion'],
+      items: [
+        {
+          name: 'Smite Slayer',
+          equipment: 'Placeholder Hełm, Placeholder Zbroja, Placeholder Broń',
+          skills: 'Placeholder Skill 1, Placeholder Skill 2',
+        },
+        {
+          name: 'Lacerate Gladiator',
+          equipment: 'Placeholder Hełm, Placeholder Zbroja, Placeholder Broń',
+          skills: 'Placeholder Skill 1, Placeholder Skill 2',
+        },
+      ],
     },
   ];
 
   selectedSlide?: Slide;
+  selectedBuild?: Build;
 
   showBuilds(slide: Slide): void {
     this.selectedSlide = slide;
   }
   closeBuilds(): void {
     this.selectedSlide = undefined;
+  }
+  showBuildDetails(build: Build): void {
+    this.selectedBuild = build;
+  }
+  closeBuildDetails(): void {
+    this.selectedBuild = undefined;
   }
 }

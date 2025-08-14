@@ -1,0 +1,2 @@
+carousel ma przyjmowac liste elemenotw i funkcje pop up
+może jakiś wizualny ekwipunek gdzie będa sloty, do których będą wchodziły pojedyncze elementy ekwipunku

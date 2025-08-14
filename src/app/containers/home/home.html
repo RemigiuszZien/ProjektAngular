@@ -22,8 +22,12 @@
           </div>
           <div class="modal-body">
             <ul>
-              @for (item of items; track item) {
-                <li>{{ item }}</li>
+              @for (item of items; track item.name) {
+                <li>
+                  <button class="btn btn-link" (click)="showBuildDetails(item)">
+                    {{ item.name }}
+                  </button>
+                </li>
               }
             </ul>
           </div>
@@ -36,4 +40,8 @@
       </div>
     </div>
   </div>
+}
+
+@if (selectedBuild) {
+  <app-build [build]="selectedBuild" (close)="closeBuildDetails()"></app-build>
 }
