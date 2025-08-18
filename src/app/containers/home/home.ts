@@ -3,14 +3,14 @@ import { Carousel } from '../../shared/components/carousel/carousel';
 import { Slide } from '../../shared/interfaces/slide';
 import { Build } from '../../shared/interfaces/build';
 import { Build as BuildComponent } from '../../shared/components/build/build';
-import { EquipmentGridComponent } from '../../shared/components/equipment-grid/equipment-grid';
+
 
 import { EquipmentSlot } from '../../shared/interfaces/equipment-slot';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [Carousel, BuildComponent, EquipmentGridComponent],
+  imports: [Carousel, BuildComponent,],
   templateUrl: './home.html',
   styleUrl: './home.scss',
   changeDetection: ChangeDetectionStrategy.OnPush

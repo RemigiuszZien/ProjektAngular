@@ -1,12 +1,12 @@
 import { Component, EventEmitter, input, output, ChangeDetectionStrategy } from '@angular/core';
 import { Build as BuildInterface } from '../../interfaces/build';
-import { EquipmentGridComponent } from '../equipment-grid/equipment-grid';
+import { Equipment } from '../equipment-grid/equipment-grid';
 
 @Component({
   selector: 'app-build',
   templateUrl: './build.html',
   styleUrl: './build.scss',
-  imports: [EquipmentGridComponent],
+  imports: [Equipment],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Build {
