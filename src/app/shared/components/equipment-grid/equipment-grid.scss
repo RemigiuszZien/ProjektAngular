@@ -1,0 +1,45 @@
+
+.poe-equipment-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 48px);
+  grid-template-rows: repeat(6, 48px);
+  gap: 4px;
+  position: relative;
+  width: max-content;
+}
+
+.poe-slot {
+  width: 48px;
+  height: 48px;
+  background: #222;
+  border: 1px solid #444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+}
+.item-icon {
+  max-width: 40px;
+  max-height: 40px;
+}
+.empty-slot {
+  width: 32px;
+  height: 32px;
+  background: #555;
+  border-radius: 4px;
+}
+.poe-slot-helmet      { left: 144px; top: 0px; }
+.poe-slot-amulet      { left: 96px;  top: 48px; }
+.poe-slot-body        { left: 144px; top: 96px; }
+.poe-slot-belt        { left: 144px; top: 240px; }
+.poe-slot-gloves      { left: 48px;  top: 144px; }
+.poe-slot-boots       { left: 240px; top: 240px; }
+.poe-slot-leftRing    { left: 48px;  top: 48px; }
+.poe-slot-rightRing   { left: 240px; top: 48px; }
+.poe-slot-weapon1     { left: 0px;   top: 48px;  height: 144px; }
+.poe-slot-weapon2     { left: 288px; top: 48px;  height: 144px; }
+.poe-slot-flask1      { left: 48px;  top: 288px; }
+.poe-slot-flask2      { left: 96px;  top: 288px; }
+.poe-slot-flask3      { left: 144px; top: 288px; }
+.poe-slot-flask4      { left: 192px; top: 288px; }
+.poe-slot-flask5      { left: 240px; top: 288px; }

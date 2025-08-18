@@ -1,25 +1,20 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostBinding, signal } from '@angular/core';
+import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
-  standalone: true,
-  imports: [CommonModule, RouterModule],
   templateUrl: './sidebar.html',
-  styleUrl: './sidebar.scss'
+  styleUrl: './sidebar.scss',
+  imports: [CommonModule, RouterModule],
+  host: {
+    'class.sidenav': 'true',
+    '[class.sidenav-collapsed]': 'collapsed()'
+  },
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Sidebar {
-
-  @HostBinding('class.sidenav') hostSidenav = true;
-
-  @HostBinding('class.sidenav-collapsed')
-  get hostCollapsed() {
-    return this.collapsed();
-  }
-
   collapsed = signal(true);
-
   items = signal([
     { routeLink: '/link1', label: 'link1', icon: '🏠' },
     { routeLink: '/link2', label: 'link2', icon: '📄' },

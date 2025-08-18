@@ -3,7 +3,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">{{ build?.name }}</h5>
+          <h5 class="modal-title">{{ build()?.name }}</h5>
           <button
             type="button"
             class="btn-close"
@@ -12,8 +12,10 @@
           ></button>
         </div>
         <div class="modal-body">
-          <p><strong>Ekwipunek:</strong> {{ build?.equipment }}</p>
-          <p><strong>Skille:</strong> {{ build?.skills }}</p>
+          @if (build()?.equipment) {
+            <app-equipment-grid [slots]="build()?.equipment ?? []"></app-equipment-grid>
+          }
+          <p><strong>Skille:</strong> {{ build()?.skills }}</p>
         </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" (click)="close.emit()">

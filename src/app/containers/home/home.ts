@@ -1,15 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { Carousel } from '../../shared/components/carousel/carousel';
 import { Slide } from '../../shared/interfaces/slide';
 import { Build } from '../../shared/interfaces/build';
 import { Build as BuildComponent } from '../../shared/components/build/build';
+import { EquipmentGridComponent } from '../../shared/components/equipment-grid/equipment-grid';
+
+import { EquipmentSlot } from '../../shared/interfaces/equipment-slot';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [Carousel, BuildComponent],
+  imports: [Carousel, BuildComponent, EquipmentGridComponent],
   templateUrl: './home.html',
   styleUrl: './home.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Home {
   slides: Slide[] = [
@@ -21,12 +25,44 @@ export class Home {
       items: [
         {
           name: 'Cast when Stunned autobomber Chieftain',
-          equipment: 'Hełm z Runami, Zbroja Wojownika, Młot Gromu',
+          equipment: [
+            { slot: 'helmet', item: { name: 'Iron Helmet', icon: '/public/helmet.png' } },
+            { slot: 'amulet', item: { name: 'Gold Amulet', icon: '/public/amulet.png' } },
+            { slot: 'body', item: { name: 'Steel Armor', icon: '/public/armor.png' } },
+            { slot: 'belt', item: { name: 'Leather Belt', icon: '/public/belt.png' } },
+            { slot: 'gloves', item: { name: 'Iron Gloves', icon: '/public/gloves.png' } },
+            { slot: 'boots', item: { name: 'Leather Boots', icon: '/public/boots.png' } },
+            { slot: 'leftRing', item: { name: 'Sapphire Ring', icon: '/public/ring.png' } },
+            { slot: 'rightRing', item: { name: 'Ruby Ring', icon: '/public/ring.png' } },
+            { slot: 'weapon1', item: { name: 'Sword', icon: '/public/sword.png' } },
+            { slot: 'weapon2', item: { name: 'Axe', icon: '/public/axe.png' } },
+            { slot: 'flask1', item: { name: 'Life Flask', icon: '/public/flask.png' } },
+            { slot: 'flask2', item: { name: 'Mana Flask', icon: '/public/flask.png' } },
+            { slot: 'flask3' },
+            { slot: 'flask4' },
+            { slot: 'flask5' }
+          ],
           skills: 'Cast when Stunned, Molten Shell, Enduring Cry',
         },
         {
           name: 'Blade Vortex Juggernaut',
-          equipment: 'Placeholder Hełm, Placeholder Zbroja, Placeholder Broń',
+          equipment: [
+            { slot: 'helmet', item: { name: 'Iron Helmet', icon: '/public/helmet.png' } },
+            { slot: 'amulet', item: { name: 'Gold Amulet', icon: '/public/amulet.png' } },
+            { slot: 'body', item: { name: 'Steel Armor', icon: '/public/armor.png' } },
+            { slot: 'belt', item: { name: 'Leather Belt', icon: '/public/belt.png' } },
+            { slot: 'gloves', item: { name: 'Iron Gloves', icon: '/public/gloves.png' } },
+            { slot: 'boots', item: { name: 'Leather Boots', icon: '/public/boots.png' } },
+            { slot: 'leftRing', item: { name: 'Sapphire Ring', icon: '/public/ring.png' } },
+            { slot: 'rightRing', item: { name: 'Ruby Ring', icon: '/public/ring.png' } },
+            { slot: 'weapon1', item: { name: 'Sword', icon: '/public/sword.png' } },
+            { slot: 'weapon2', item: { name: 'Axe', icon: '/public/axe.png' } },
+            { slot: 'flask1', item: { name: 'Life Flask', icon: '/public/flask.png' } },
+            { slot: 'flask2', item: { name: 'Mana Flask', icon: '/public/flask.png' } },
+            { slot: 'flask3' },
+            { slot: 'flask4' },
+            { slot: 'flask5' }
+          ],
           skills: 'Placeholder Skill 1, Placeholder Skill 2',
         },
       ],
@@ -39,12 +75,44 @@ export class Home {
       items: [
         {
           name: 'Raise Spectre Necromancer',
-          equipment: 'Spectre Helm, Necro Robe, Wand',
+          equipment: [
+            { slot: 'helmet' },
+            { slot: 'amulet' },
+            { slot: 'body' },
+            { slot: 'belt' },
+            { slot: 'gloves' },
+            { slot: 'boots' },
+            { slot: 'leftRing' },
+            { slot: 'rightRing' },
+            { slot: 'weapon1' },
+            { slot: 'weapon2' },
+            { slot: 'flask1' },
+            { slot: 'flask2' },
+            { slot: 'flask3' },
+            { slot: 'flask4' },
+            { slot: 'flask5' }
+          ],
           skills: 'Raise Spectre, Summon Skeletons',
         },
         {
           name: 'Summon Raging Spirits Necromancer',
-          equipment: 'Placeholder Hełm, Placeholder Zbroja, Placeholder Broń',
+          equipment: [
+            { slot: 'helmet' },
+            { slot: 'amulet' },
+            { slot: 'body' },
+            { slot: 'belt' },
+            { slot: 'gloves' },
+            { slot: 'boots' },
+            { slot: 'leftRing' },
+            { slot: 'rightRing' },
+            { slot: 'weapon1' },
+            { slot: 'weapon2' },
+            { slot: 'flask1' },
+            { slot: 'flask2' },
+            { slot: 'flask3' },
+            { slot: 'flask4' },
+            { slot: 'flask5' }
+          ],
           skills: 'Placeholder Skill 1, Placeholder Skill 2',
         },
       ],
@@ -57,12 +125,44 @@ export class Home {
       items: [
         {
           name: 'Archmage Hierophant',
-          equipment: 'Placeholder Hełm, Placeholder Zbroja, Placeholder Broń',
+          equipment: [
+            { slot: 'helmet' },
+            { slot: 'amulet' },
+            { slot: 'body' },
+            { slot: 'belt' },
+            { slot: 'gloves' },
+            { slot: 'boots' },
+            { slot: 'leftRing' },
+            { slot: 'rightRing' },
+            { slot: 'weapon1' },
+            { slot: 'weapon2' },
+            { slot: 'flask1' },
+            { slot: 'flask2' },
+            { slot: 'flask3' },
+            { slot: 'flask4' },
+            { slot: 'flask5' }
+          ],
           skills: 'Placeholder Skill 1, Placeholder Skill 2',
         },
         {
           name: 'Penance Brand of Dissipation Inquisitor',
-          equipment: 'Placeholder Hełm, Placeholder Zbroja, Placeholder Broń',
+          equipment: [
+            { slot: 'helmet' },
+            { slot: 'amulet' },
+            { slot: 'body' },
+            { slot: 'belt' },
+            { slot: 'gloves' },
+            { slot: 'boots' },
+            { slot: 'leftRing' },
+            { slot: 'rightRing' },
+            { slot: 'weapon1' },
+            { slot: 'weapon2' },
+            { slot: 'flask1' },
+            { slot: 'flask2' },
+            { slot: 'flask3' },
+            { slot: 'flask4' },
+            { slot: 'flask5' }
+          ],
           skills: 'Placeholder Skill 1, Placeholder Skill 2',
         },
       ],
@@ -75,12 +175,44 @@ export class Home {
       items: [
         {
           name: 'Lightning Strike Trickster',
-          equipment: 'Placeholder Hełm, Placeholder Zbroja, Placeholder Broń',
+          equipment: [
+            { slot: 'helmet' },
+            { slot: 'amulet' },
+            { slot: 'body' },
+            { slot: 'belt' },
+            { slot: 'gloves' },
+            { slot: 'boots' },
+            { slot: 'leftRing' },
+            { slot: 'rightRing' },
+            { slot: 'weapon1' },
+            { slot: 'weapon2' },
+            { slot: 'flask1' },
+            { slot: 'flask2' },
+            { slot: 'flask3' },
+            { slot: 'flask4' },
+            { slot: 'flask5' }
+          ],
           skills: 'Placeholder Skill 1, Placeholder Skill 2',
         },
         {
           name: 'Hexblast Mines Saboteur',
-          equipment: 'Placeholder Hełm, Placeholder Zbroja, Placeholder Broń',
+          equipment: [
+            { slot: 'helmet' },
+            { slot: 'amulet' },
+            { slot: 'body' },
+            { slot: 'belt' },
+            { slot: 'gloves' },
+            { slot: 'boots' },
+            { slot: 'leftRing' },
+            { slot: 'rightRing' },
+            { slot: 'weapon1' },
+            { slot: 'weapon2' },
+            { slot: 'flask1' },
+            { slot: 'flask2' },
+            { slot: 'flask3' },
+            { slot: 'flask4' },
+            { slot: 'flask5' }
+          ],
           skills: 'Placeholder Skill 1, Placeholder Skill 2',
         },
       ],
@@ -93,12 +225,44 @@ export class Home {
       items: [
         {
           name: 'Aurabot Ascendant',
-          equipment: 'Placeholder Hełm, Placeholder Zbroja, Placeholder Broń',
+          equipment: [
+            { slot: 'helmet' },
+            { slot: 'amulet' },
+            { slot: 'body' },
+            { slot: 'belt' },
+            { slot: 'gloves' },
+            { slot: 'boots' },
+            { slot: 'leftRing' },
+            { slot: 'rightRing' },
+            { slot: 'weapon1' },
+            { slot: 'weapon2' },
+            { slot: 'flask1' },
+            { slot: 'flask2' },
+            { slot: 'flask3' },
+            { slot: 'flask4' },
+            { slot: 'flask5' }
+          ],
           skills: 'Placeholder Skill 1, Placeholder Skill 2',
         },
         {
           name: 'Merc Carry Ascendant',
-          equipment: 'Placeholder Hełm, Placeholder Zbroja, Placeholder Broń',
+          equipment: [
+            { slot: 'helmet' },
+            { slot: 'amulet' },
+            { slot: 'body' },
+            { slot: 'belt' },
+            { slot: 'gloves' },
+            { slot: 'boots' },
+            { slot: 'leftRing' },
+            { slot: 'rightRing' },
+            { slot: 'weapon1' },
+            { slot: 'weapon2' },
+            { slot: 'flask1' },
+            { slot: 'flask2' },
+            { slot: 'flask3' },
+            { slot: 'flask4' },
+            { slot: 'flask5' }
+          ],
           skills: 'Placeholder Skill 1, Placeholder Skill 2',
         },
       ],
@@ -111,12 +275,44 @@ export class Home {
       items: [
         {
           name: 'Viper Strike of Mamba Pathfinder',
-          equipment: 'Placeholder Hełm, Placeholder Zbroja, Placeholder Broń',
+          equipment: [
+            { slot: 'helmet' },
+            { slot: 'amulet' },
+            { slot: 'body' },
+            { slot: 'belt' },
+            { slot: 'gloves' },
+            { slot: 'boots' },
+            { slot: 'leftRing' },
+            { slot: 'rightRing' },
+            { slot: 'weapon1' },
+            { slot: 'weapon2' },
+            { slot: 'flask1' },
+            { slot: 'flask2' },
+            { slot: 'flask3' },
+            { slot: 'flask4' },
+            { slot: 'flask5' }
+          ],
           skills: 'Placeholder Skill 1, Placeholder Skill 2',
         },
         {
           name: 'Tornado Shot Warden',
-          equipment: 'Placeholder Hełm, Placeholder Zbroja, Placeholder Broń',
+          equipment: [
+            { slot: 'helmet' },
+            { slot: 'amulet' },
+            { slot: 'body' },
+            { slot: 'belt' },
+            { slot: 'gloves' },
+            { slot: 'boots' },
+            { slot: 'leftRing' },
+            { slot: 'rightRing' },
+            { slot: 'weapon1' },
+            { slot: 'weapon2' },
+            { slot: 'flask1' },
+            { slot: 'flask2' },
+            { slot: 'flask3' },
+            { slot: 'flask4' },
+            { slot: 'flask5' }
+          ],
           skills: 'Placeholder Skill 1, Placeholder Skill 2',
         },
       ],
@@ -129,31 +325,55 @@ export class Home {
       items: [
         {
           name: 'Smite Slayer',
-          equipment: 'Placeholder Hełm, Placeholder Zbroja, Placeholder Broń',
+          equipment: [
+            { slot: 'helmet' },
+            { slot: 'amulet' },
+            { slot: 'body' },
+            { slot: 'belt' },
+            { slot: 'gloves' },
+            { slot: 'boots' },
+            { slot: 'leftRing' },
+            { slot: 'rightRing' },
+            { slot: 'weapon1' },
+            { slot: 'weapon2' },
+            { slot: 'flask1' },
+            { slot: 'flask2' },
+            { slot: 'flask3' },
+            { slot: 'flask4' },
+            { slot: 'flask5' }
+          ],
           skills: 'Placeholder Skill 1, Placeholder Skill 2',
         },
         {
           name: 'Lacerate Gladiator',
-          equipment: 'Placeholder Hełm, Placeholder Zbroja, Placeholder Broń',
+          equipment: [
+            { slot: 'helmet' },
+            { slot: 'amulet' },
+            { slot: 'body' },
+            { slot: 'belt' },
+            { slot: 'gloves' },
+            { slot: 'boots' },
+            { slot: 'leftRing' },
+            { slot: 'rightRing' },
+            { slot: 'weapon1' },
+            { slot: 'weapon2' },
+            { slot: 'flask1' },
+            { slot: 'flask2' },
+            { slot: 'flask3' },
+            { slot: 'flask4' },
+            { slot: 'flask5' }
+          ],
           skills: 'Placeholder Skill 1, Placeholder Skill 2',
         },
       ],
     },
   ];
 
-  selectedSlide?: Slide;
-  selectedBuild?: Build;
+  selectedSlide = signal<Slide | undefined>(undefined);
+  selectedBuild = signal<Build | undefined>(undefined);
 
-  showBuilds(slide: Slide): void {
-    this.selectedSlide = slide;
-  }
-  closeBuilds(): void {
-    this.selectedSlide = undefined;
-  }
-  showBuildDetails(build: Build): void {
-    this.selectedBuild = build;
-  }
-  closeBuildDetails(): void {
-    this.selectedBuild = undefined;
-  }
+  showBuilds = (slide: Slide) => this.selectedSlide.set(slide);
+  closeBuilds = () => this.selectedSlide.set(undefined);
+  showBuildDetails = (build: Build) => this.selectedBuild.set(build);
+  closeBuildDetails = () => this.selectedBuild.set(undefined);
 }

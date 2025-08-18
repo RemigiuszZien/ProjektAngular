@@ -1,14 +1,15 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, input, output, ChangeDetectionStrategy } from '@angular/core';
 import { Build as BuildInterface } from '../../interfaces/build';
+import { EquipmentGridComponent } from '../equipment-grid/equipment-grid';
 
 @Component({
   selector: 'app-build',
-  imports: [],
-  standalone: true,
   templateUrl: './build.html',
   styleUrl: './build.scss',
+  imports: [EquipmentGridComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Build {
-  @Input() build?: BuildInterface;
-  @Output() close = new EventEmitter<void>();
+  build = input<BuildInterface | undefined>(undefined);
+  close = output<void>();
 }

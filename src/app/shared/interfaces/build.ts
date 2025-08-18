@@ -1,7 +1,7 @@
-import { Equipment } from './equipment';
+import { EquipmentSlot } from './equipment-slot';
 
 export interface Build {
   name: string;
-  equipment: string;
+  equipment: EquipmentSlot[];
   skills: string;
 }

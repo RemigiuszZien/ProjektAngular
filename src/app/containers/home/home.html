@@ -1,17 +1,19 @@
+
+
+
 <app-carousel
   [slides]="slides"
-  (showBuilds)="showBuilds($event)"
-  [showBuildsLabel]="'Pokaż buildy'"
+  [captionTemplate]="captionTpl"
 ></app-carousel>
 
-@if (selectedSlide?.items; as items) {
+@if (selectedSlide()?.items; as items) {
   <div class="modal-backdrop show">
     <div class="modal d-block" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">
-              Popularne Buildy: {{ selectedSlide?.title }}
+              Popularne Buildy: {{ selectedSlide()?.title }}
             </h5>
             <button
               type="button"
@@ -42,6 +44,13 @@
   </div>
 }
 
-@if (selectedBuild) {
-  <app-build [build]="selectedBuild" (close)="closeBuildDetails()"></app-build>
+@if (selectedBuild()) {
+  <app-build [build]="selectedBuild()" (close)="closeBuildDetails()"></app-build>
 }
+<ng-template #captionTpl let-slide>
+  <h5>{{ slide.title }}</h5>
+  <p>{{ slide.text }}</p>
+  <button class="btn btn-primary" (click)="showBuilds(slide)">
+    Pokaż buildy
+  </button>
+</ng-template>

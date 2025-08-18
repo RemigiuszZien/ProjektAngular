@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, ChangeDetectionStrategy } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { Home } from './containers/home/home';
 import { Sidebar } from './shared/components/sidebar/sidebar';
@@ -8,7 +8,8 @@ import { Header } from './shared/components/header/header';
   selector: 'app-root',
   imports: [RouterOutlet, Home, Header, Sidebar ],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class App {
   protected readonly title = signal('pierwszy-projekt');

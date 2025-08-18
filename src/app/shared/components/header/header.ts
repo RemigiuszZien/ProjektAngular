@@ -1,11 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-header',
-  standalone: true,
-  imports: [],
   templateUrl: './header.html',
-  styleUrl: './header.scss'
+  styleUrl: './header.scss',
+  imports: [],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Header {
 
