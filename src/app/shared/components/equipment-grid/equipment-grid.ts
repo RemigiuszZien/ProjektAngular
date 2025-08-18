@@ -8,6 +8,6 @@ import { EquipmentSlot } from '../../interfaces/equipment-slot';
   styleUrl: './equipment-grid.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class EquipmentGridComponent {
+export class Equipment {
   @Input() slots: EquipmentSlot[] = [];
 }
