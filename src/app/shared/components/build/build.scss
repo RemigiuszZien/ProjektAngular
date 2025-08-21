@@ -1,4 +1,16 @@
 
+.build-items-list {
+	max-height: 300px;
+	overflow-y: auto;
+}
+.item-row {
+	cursor: pointer;
+	transition: background 0.2s;
+}
+.item-row:hover {
+	background: #333 !important;
+}
+
 
 .modal-content {
 	background: #232323 !important;

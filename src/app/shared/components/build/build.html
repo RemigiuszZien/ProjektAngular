@@ -15,15 +15,39 @@
           @if (build()?.equipment?.length) {
             <div class="mb-3">
               <strong>Wyposażenie:</strong>
-              <ul class="list-group list-group-flush">
+              <ul class="list-group list-group-flush build-items-list">
                 @for (slot of build()?.equipment ?? []; track slot.slot) {
                   @if (slot.item) {
-                    <li class="list-group-item bg-dark text-light">
+                    <li class="list-group-item bg-dark text-light item-row" (click)="showItemMods(slot.item.name)">
                       {{ slot.item.name }}
                     </li>
                   }
                 }
               </ul>
+              @if (selectedItem()) {
+                <div class="modal-backdrop show">
+                  <div class="modal d-block" tabindex="-1">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title">{{ selectedItem()?.name }}</h5>
+                          <button type="button" class="btn-close" aria-label="Zamknij" (click)="closeItemModal()"></button>
+                        </div>
+                        <div class="modal-body">
+                          <ul>
+                            @for (line of selectedItem()?.lines ?? []; track line) {
+                              <li>{{ line }}</li>
+                            }
+                          </ul>
+                        </div>
+                        <div class="modal-footer">
+                          <button class="btn btn-secondary" (click)="closeItemModal()">Zamknij</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              }
             </div>
           }
           @if (build()?.skillGems?.length) {
