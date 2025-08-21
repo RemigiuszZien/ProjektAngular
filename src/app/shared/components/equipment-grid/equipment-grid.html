@@ -2,7 +2,11 @@
   @for (slot of slots; track slot.slot) {
     <div class="poe-slot poe-slot-{{slot.slot}}" [title]="slot.item?.name || slot.slot">
       @if (slot.item) {
-        <img [src]="slot.item.icon" [alt]="slot.item.name" class="item-icon" />
+        @if (slot.item.icon) {
+          <img [src]="slot.item.icon" [alt]="slot.item.name" class="item-icon" />
+        } @else {
+          <div class="item-name-placeholder">{{ slot.item.name }}</div>
+        }
       } @else {
         <div class="empty-slot"></div>
       }

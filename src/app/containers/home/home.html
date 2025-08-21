@@ -3,7 +3,7 @@
   [captionTemplate]="captionTpl"
 ></app-carousel>
 
-@if (selectedSlide()?.items; as items) {
+@if (selectedSlide()) {
   <div class="modal-backdrop show">
     <div class="modal d-block" tabindex="-1">
       <div class="modal-dialog">
@@ -20,15 +20,23 @@
             ></button>
           </div>
           <div class="modal-body">
-            <ul>
-              @for (item of items; track item.name) {
-                <li>
-                  <button class="btn btn-link" (click)="showBuildDetails(item)">
-                    {{ item.name }}
-                  </button>
-                </li>
+            @if (selectedSlide()?.title === 'Shadow') {
+              @if (builds().length > 0) {
+                <ul>
+                  @for (build of builds(); track build.id) {
+                    <li>
+                      <button class="btn btn-link" (click)="showBuildDetails(build)">
+                        {{ build.name }}
+                      </button>
+                    </li>
+                  }
+                </ul>
+              } @else {
+                <p>Brak buildów dla Trickstera.</p>
               }
-            </ul>
+            } @else {
+              <p>Brak buildów dla tej klasy.</p>
+            }
           </div>
           <div class="modal-footer">
             <button class="btn btn-secondary" (click)="closeBuilds()">
@@ -41,8 +49,8 @@
   </div>
 }
 
-@if (selectedBuild()) {
-  <app-build [build]="selectedBuild()" (close)="closeBuildDetails()"></app-build>
+@if (selectedBuildForComponent()) {
+  <app-build [build]="selectedBuildForComponent()" (close)="closeBuildDetails()"></app-build>
 }
 <ng-template #captionTpl let-slide>
   <h5>{{ slide.title }}</h5>

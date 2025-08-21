@@ -1,4 +1,5 @@
 import { Component, EventEmitter, input, output, ChangeDetectionStrategy } from '@angular/core';
+import { NgOptimizedImage } from '@angular/common';
 import { Build as BuildInterface } from '../../interfaces/build';
 import { Equipment } from '../equipment-grid/equipment-grid';
 
@@ -6,7 +7,7 @@ import { Equipment } from '../equipment-grid/equipment-grid';
   selector: 'app-build',
   templateUrl: './build.html',
   styleUrl: './build.scss',
-  imports: [Equipment],
+  imports: [Equipment, NgOptimizedImage],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Build {
