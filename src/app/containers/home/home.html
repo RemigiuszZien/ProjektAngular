@@ -1,57 +1,10 @@
+
+
 <app-carousel
   [slides]="slides"
   [captionTemplate]="captionTpl"
 ></app-carousel>
 
-@if (selectedSlide()) {
-  <div class="modal-backdrop show">
-    <div class="modal d-block" tabindex="-1">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">
-              Popularne Buildy: {{ selectedSlide()?.title }}
-            </h5>
-            <button
-              type="button"
-              class="btn-close"
-              aria-label="Zamknij"
-              (click)="closeBuilds()"
-            ></button>
-          </div>
-          <div class="modal-body">
-            @if (selectedSlide()?.title === 'Shadow') {
-              @if (builds().length > 0) {
-                <ul>
-                  @for (build of builds(); track build.id) {
-                    <li>
-                      <button class="btn btn-link" (click)="showBuildDetails(build)">
-                        {{ build.name }}
-                      </button>
-                    </li>
-                  }
-                </ul>
-              } @else {
-                <p>Brak buildów dla Trickstera.</p>
-              }
-            } @else {
-              <p>Brak buildów dla tej klasy.</p>
-            }
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-secondary" (click)="closeBuilds()">
-              Zamknij
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-}
-
-@if (selectedBuildForComponent()) {
-  <app-build [build]="selectedBuildForComponent()" (close)="closeBuildDetails()"></app-build>
-}
 <ng-template #captionTpl let-slide>
   <h5>{{ slide.title }}</h5>
   <p>{{ slide.text }}</p>
@@ -59,3 +12,39 @@
     Pokaż buildy
   </button>
 </ng-template>
+
+@if (selectedSlide()) {
+  <div class="modal-backdrop show">
+    <div class="modal d-block" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Buildy dla klasy: {{ selectedSlide()?.title }}</h5>
+            <button type="button" class="btn-close" aria-label="Zamknij" (click)="closeBuilds()"></button>
+          </div>
+          <div class="modal-body">
+            @if (buildsForSelectedClass().length) {
+              <ul class="list-group">
+                @for (build of buildsForSelectedClass(); track build.id) {
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>{{ build.name }}</span>
+                    <button class="btn btn-sm btn-outline-primary" (click)="selectBuild(build)">Pokaż</button>
+                  </li>
+                }
+              </ul>
+            } @else {
+              <p>Brak buildów dla tej klasy.</p>
+            }
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" (click)="closeBuilds()">Zamknij</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}
+
+@if (selectedBuild()) {
+  <app-build [build]="selectedBuild()" (close)="closeBuildModal()"></app-build>
+}

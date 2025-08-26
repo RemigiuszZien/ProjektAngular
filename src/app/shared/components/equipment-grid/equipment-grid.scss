@@ -1,45 +1,126 @@
-
-.poe-equipment-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 48px);
-  grid-template-rows: repeat(6, 48px);
-  gap: 4px;
+.item-tooltip-wrapper {
   position: relative;
-  width: max-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.item-tooltip {
+  display: none;
+  position: absolute;
+  left: 110%;
+  top: 50%;
+  transform: translateY(-50%);
+  min-width: 220px;
+  background: #181818;
+  color: #fff;
+  border: 1px solid #666;
+  border-radius: 6px;
+  box-shadow: 0 4px 24px #000a;
+  padding: 12px 16px;
+  z-index: 100;
+  font-size: 0.95rem;
+  pointer-events: none;
+}
+.item-tooltip-title {
+  font-weight: bold;
+  margin-bottom: 6px;
+  color: #ffe066;
+  text-shadow: 0 1px 4px #000;
+}
+.item-tooltip-lines {
+  margin: 0;
+  padding: 0 0 0 1em;
+  list-style: disc;
+}
+.item-tooltip-wrapper:hover .item-tooltip {
+  display: block;
+}
+
+.poe-equipment-grid-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+  width: 100%;
+}
+.poe-equipment-grid {
+  position: relative;
+  width: 420px;
+  height: 520px;
+  background: #181818;
+  border: 2px solid #333;
+  border-radius: 10px;
+  box-shadow: 0 0 24px #000a;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  padding-right: 40px;
 }
 
 .poe-slot {
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   background: #222;
   border: 1px solid #444;
   display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px #0006;
+  transition: box-shadow 0.2s;
+}
+.poe-slot-left-hand,
+.poe-slot-right-hand {
+  height: 112px;
+}
+.poe-slot-chest {
+  height: 112px;
 }
 .item-icon {
   max-width: 40px;
   max-height: 40px;
 }
 .empty-slot {
-  width: 32px;
-  height: 32px;
-  background: #555;
-  border-radius: 4px;
+  width: 48px;
+  height: 48px;
+  background: repeating-linear-gradient(135deg, #444 0 8px, #555 8px 16px);
+  border: 2px dashed #888;
+  border-radius: 8px;
+  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  color: #bbb;
 }
-.poe-slot-helmet      { left: 144px; top: 0px; }
-.poe-slot-amulet      { left: 96px;  top: 48px; }
-.poe-slot-body        { left: 144px; top: 96px; }
-.poe-slot-belt        { left: 144px; top: 240px; }
-.poe-slot-gloves      { left: 48px;  top: 144px; }
-.poe-slot-boots       { left: 240px; top: 240px; }
-.poe-slot-leftRing    { left: 48px;  top: 48px; }
-.poe-slot-rightRing   { left: 240px; top: 48px; }
-.poe-slot-weapon1     { left: 0px;   top: 48px;  height: 144px; }
-.poe-slot-weapon2     { left: 288px; top: 48px;  height: 144px; }
-.poe-slot-flask1      { left: 48px;  top: 288px; }
-.poe-slot-flask2      { left: 96px;  top: 288px; }
-.poe-slot-flask3      { left: 144px; top: 288px; }
-.poe-slot-flask4      { left: 192px; top: 288px; }
-.poe-slot-flask5      { left: 240px; top: 288px; }
+.poe-slot-helmet      { left: 200px; top: 80px; }
+.poe-slot-left-hand   { left: 60px;  top: 80px; }
+.poe-slot-right-hand  { left: 340px; top: 80px; }
+.poe-slot-chest       { left: 200px; top: 210px; }
+.poe-slot-left-ring   { left: 60px;  top: 240px; }
+.poe-slot-right-ring  { left: 340px; top: 240px; }
+.poe-slot-amulet      { left: 340px; top: 160px; }
+.poe-slot-belt        { left: 200px; top: 340px; }
+.poe-slot-gloves      { left: 60px;  top: 340px; }
+.poe-slot-boots       { left: 340px; top: 340px; }
+.poe-slot-flask1      { left: 80px;  top: 420px; }
+.poe-slot-flask2      { left: 140px; top: 420px; }
+.poe-slot-flask3      { left: 200px; top: 420px; }
+.poe-slot-flask4      { left: 260px; top: 420px; }
+.poe-slot-flask5      { left: 320px; top: 420px; }
+
+
+.poe-slot-left-ring,
+.poe-slot-gloves {
+  margin-bottom: 16px;
+}
+.poe-slot-right-ring,
+.poe-slot-boots {
+  margin-bottom: 16px;
+}
+.poe-slot-amulet {
+  margin-bottom: 16px;
+}
+
