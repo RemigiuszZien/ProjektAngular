@@ -29,16 +29,13 @@ export class AssetPathService {
   getItemIconPath(iconPath: string): string {
     console.log('Original iconPath:', iconPath);
     
-    // Jeśli to już pełny URL, zwróć bez zmian
     if (iconPath.startsWith('http://') || iconPath.startsWith('https://') || iconPath.startsWith('data:')) {
       console.log('Returning full URL:', iconPath);
       return iconPath;
     }
-    
-    // Jeśli ścieżka nie zawiera katalogu, dodaj domyślny prefix dla ikon itemów
+
     let fullPath = iconPath;
     if (!iconPath.includes('/')) {
-      // Jeśli to tylko nazwa pliku, dodaj prefix icons/items/
       fullPath = `icons/items/${iconPath}`;
       console.log('Added icons/items prefix:', fullPath);
     }
