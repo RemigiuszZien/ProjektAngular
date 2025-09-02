@@ -1,0 +1,123 @@
+.builds-list {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.builds-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.build-card {
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  cursor: pointer;
+  transition: var(--transition-base);
+  box-shadow: var(--shadow-base);
+  
+  &:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-elevated);
+  }
+}
+
+.build-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  &:hover img {
+    transform: scale(1.05);
+  }
+}
+
+.build-info {
+  padding: 1.5rem;
+
+  h3 {
+    margin: 0 0 0.5rem 0;
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .build-class {
+    color: var(--text-primary);
+    margin: 0;
+    font-size: 1rem;
+    text-transform: capitalize;
+    font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  }
+}
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  text-align: center;
+  
+  p {
+    margin-top: 1rem;
+    color: var(--text-muted);
+  }
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border-color);
+  border-top: 3px solid var(--color-primary);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-message {
+  background: var(--surface-secondary);
+  border: 1px solid #ff6b6b;
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  text-align: center;
+  margin: 2rem 0;
+  
+  p {
+    color: #ff6b6b;
+    margin-bottom: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .builds-list {
+    padding: 1rem;
+  }
+  
+  .builds-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .build-card {
+    padding: 1rem;
+  }
+}

@@ -1,32 +1,41 @@
 
-.build-items-list {
-	max-height: 300px;
-	overflow-y: auto;
-}
-.item-row {
-	cursor: pointer;
-	transition: background 0.2s;
-}
-.item-row:hover {
-	background: #333 !important;
+%scrollable-container {
+  max-height: 300px;
+  overflow-y: auto;
 }
 
+%interactive-row {
+  cursor: pointer;
+  transition: var(--transition-base);
+  
+  &:hover {
+    background: var(--surface-hover);
+  }
+}
+
+.build-items-list {
+  @extend %scrollable-container;
+}
+
+.item-row {
+  @extend %interactive-row;
+}
 
 .modal-content {
-	background: #232323 !important;
-	border-radius: 0.5rem;
-	box-shadow: 0 8px 32px #000a;
-	color: #fff;
-	opacity: 1 !important;
+  background: var(--surface-secondary);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-large);
+  color: var(--text-primary);
+  opacity: 1;
 }
 
 .modal-backdrop.show {
-	background: #111 !important;
-	opacity: 0.95 !important;
-	backdrop-filter: blur(2px);
-	z-index: 1050;
+  background: var(--surface-dark);
+  opacity: 0.95;
+  backdrop-filter: blur(2px);
+  z-index: 1050;
 }
 
 .modal {
-	z-index: 1060;
+  z-index: 1060;
 }

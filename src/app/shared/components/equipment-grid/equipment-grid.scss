@@ -1,126 +1,198 @@
-.item-tooltip-wrapper {
-  position: relative;
+.equipment-wrapper {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 100%;
-}
-.item-tooltip {
-  display: none;
-  position: absolute;
-  left: 110%;
-  top: 50%;
-  transform: translateY(-50%);
-  min-width: 220px;
-  background: #181818;
-  color: #fff;
-  border: 1px solid #666;
-  border-radius: 6px;
-  box-shadow: 0 4px 24px #000a;
-  padding: 12px 16px;
-  z-index: 100;
-  font-size: 0.95rem;
-  pointer-events: none;
-}
-.item-tooltip-title {
-  font-weight: bold;
-  margin-bottom: 6px;
-  color: #ffe066;
-  text-shadow: 0 1px 4px #000;
-}
-.item-tooltip-lines {
-  margin: 0;
-  padding: 0 0 0 1em;
-  list-style: disc;
-}
-.item-tooltip-wrapper:hover .item-tooltip {
-  display: block;
+  padding: 1rem;
+  min-height: 400px;
 }
 
-.poe-equipment-grid-wrapper {
+.equipment-grid {
+  display: grid;
+  grid-template-areas:
+    ".        .        helmet    .        ."
+    ".        left-hand amulet   right-hand ."
+    ".        left-ring chest    right-ring ."
+    ".        gloves   belt     boots      ."
+    "flask1   flask2   flask3   flask4     flask5";
+  grid-template-columns: repeat(5, 50px);
+  grid-template-rows: repeat(5, 50px);
+  gap: 6px;
+  background: var(--surface-dark);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  width: fit-content;
+  box-shadow: var(--shadow-base);
+}
+
+.slot {
+  background: var(--surface-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-small);
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100%;
-  width: 100%;
-}
-.poe-equipment-grid {
-  position: relative;
-  width: 420px;
-  height: 520px;
-  background: #181818;
-  border: 2px solid #333;
-  border-radius: 10px;
-  box-shadow: 0 0 24px #000a;
-  margin-top: 40px;
-  margin-bottom: 40px;
-  padding-right: 40px;
-}
-
-.poe-slot {
-  width: 56px;
-  height: 56px;
-  background: #222;
-  border: 1px solid #444;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px #0006;
-  transition: box-shadow 0.2s;
-}
-.poe-slot-left-hand,
-.poe-slot-right-hand {
-  height: 112px;
-}
-.poe-slot-chest {
-  height: 112px;
-}
-.item-icon {
-  max-width: 40px;
-  max-height: 40px;
-}
-.empty-slot {
   width: 48px;
   height: 48px;
-  background: repeating-linear-gradient(135deg, #444 0 8px, #555 8px 16px);
-  border: 2px dashed #888;
-  border-radius: 8px;
-  opacity: 0.7;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.8rem;
-  color: #bbb;
-}
-.poe-slot-helmet      { left: 200px; top: 80px; }
-.poe-slot-left-hand   { left: 60px;  top: 80px; }
-.poe-slot-right-hand  { left: 340px; top: 80px; }
-.poe-slot-chest       { left: 200px; top: 210px; }
-.poe-slot-left-ring   { left: 60px;  top: 240px; }
-.poe-slot-right-ring  { left: 340px; top: 240px; }
-.poe-slot-amulet      { left: 340px; top: 160px; }
-.poe-slot-belt        { left: 200px; top: 340px; }
-.poe-slot-gloves      { left: 60px;  top: 340px; }
-.poe-slot-boots       { left: 340px; top: 340px; }
-.poe-slot-flask1      { left: 80px;  top: 420px; }
-.poe-slot-flask2      { left: 140px; top: 420px; }
-.poe-slot-flask3      { left: 200px; top: 420px; }
-.poe-slot-flask4      { left: 260px; top: 420px; }
-.poe-slot-flask5      { left: 320px; top: 420px; }
-
-
-.poe-slot-left-ring,
-.poe-slot-gloves {
-  margin-bottom: 16px;
-}
-.poe-slot-right-ring,
-.poe-slot-boots {
-  margin-bottom: 16px;
-}
-.poe-slot-amulet {
-  margin-bottom: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
+.slot:hover {
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-elevated);
+  transform: translateY(-1px);
+}
+
+.slot .icon {
+  max-width: 85%;
+  max-height: 85%;
+  object-fit: contain;
+}
+
+.slot .label {
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  text-align: center;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.slot .placeholder {
+  font-size: 0.6rem;
+  color: var(--text-primary);
+  text-align: center;
+  padding: 0.1rem;
+  font-weight: 500;
+}
+
+.slot[data-slot="helmet"] { grid-area: helmet; }
+.slot[data-slot="amulet"] { grid-area: amulet; }
+.slot[data-slot="left-hand"] { grid-area: left-hand; }
+.slot[data-slot="chest"] { grid-area: chest; }
+.slot[data-slot="right-hand"] { grid-area: right-hand; }
+.slot[data-slot="left-ring"] { grid-area: left-ring; }
+.slot[data-slot="belt"] { grid-area: belt; }
+.slot[data-slot="right-ring"] { grid-area: right-ring; }
+.slot[data-slot="gloves"] { grid-area: gloves; }
+.slot[data-slot="boots"] { grid-area: boots; }
+.slot[data-slot="flask1"] { grid-area: flask1; }
+.slot[data-slot="flask2"] { grid-area: flask2; }
+.slot[data-slot="flask3"] { grid-area: flask3; }
+.slot[data-slot="flask4"] { grid-area: flask4; }
+.slot[data-slot="flask5"] { grid-area: flask5; }
+
+@media (max-width: 992px) {
+  .equipment-wrapper {
+    padding: 0.75rem;
+  }
+  
+  .equipment-grid {
+    grid-template-columns: repeat(5, 46px);
+    grid-template-rows: repeat(5, 46px);
+    gap: 5px;
+    padding: 0.875rem;
+  }
+  
+  .slot {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (max-width: 768px) {
+  .equipment-wrapper {
+    padding: 0.5rem;
+    min-height: 300px;
+  }
+  
+  .equipment-grid {
+    grid-template-columns: repeat(5, 42px);
+    grid-template-rows: repeat(5, 42px);
+    gap: 4px;
+    padding: 0.75rem;
+  }
+  
+  .slot {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .slot .label,
+  .slot .placeholder {
+    font-size: 0.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .equipment-wrapper {
+    padding: 0.375rem;
+    min-height: 275px;
+  }
+  
+  .equipment-grid {
+    grid-template-columns: repeat(5, 38px);
+    grid-template-rows: repeat(5, 38px);
+    gap: 3.5px;
+    padding: 0.625rem;
+  }
+  
+  .slot {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .slot .label,
+  .slot .placeholder {
+    font-size: 0.48rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .equipment-wrapper {
+    padding: 0.25rem;
+    min-height: 250px;
+  }
+  
+  .equipment-grid {
+    grid-template-columns: repeat(5, 35px);
+    grid-template-rows: repeat(5, 35px);
+    gap: 3px;
+    padding: 0.5rem;
+  }
+  
+  .slot {
+    width: 33px;
+    height: 33px;
+  }
+  
+  .slot .label,
+  .slot .placeholder {
+    font-size: 0.45rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .equipment-wrapper {
+    padding: 0.2rem;
+    min-height: 225px;
+  }
+  
+  .equipment-grid {
+    grid-template-columns: repeat(5, 32px);
+    grid-template-rows: repeat(5, 32px);
+    gap: 2.5px;
+    padding: 0.4rem;
+  }
+  
+  .slot {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .slot .label,
+  .slot .placeholder {
+    font-size: 0.4rem;
+  }
+}

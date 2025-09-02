@@ -1,22 +1,20 @@
-import { Component, input, output, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, input, output, ChangeDetectionStrategy, signal, computed } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
-import { Equipment } from '../equipment-grid/equipment-grid';
+import { EquipmentGrid } from '../equipment-grid/equipment-grid';
+import { BuildRealtimeDoc, Equipment } from '../../services/build-realtime.service';
 
 @Component({
   selector: 'app-build',
   templateUrl: './build.html',
   styleUrl: './build.scss',
-  imports: [Equipment, NgOptimizedImage],
+  imports: [EquipmentGrid, NgOptimizedImage],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Build {
-  build = input<any | undefined>(undefined);
+  build = input<BuildRealtimeDoc | null>(null);
   close = output<void>();
-  selectedItem = signal<any | null>(null);
-  showItemMods(name: string) {
-    this.selectedItem.set(null);
-  }
-  closeItemModal() {
-    this.selectedItem.set(null);
-  }
+  selectedItem = signal<Equipment | null>(null);
+  
+  equipment = computed(() => this.build()?.equipment ?? []);
+  
 }

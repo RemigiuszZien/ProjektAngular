@@ -1,0 +1,42 @@
+@if (item()) {
+  <div class="tooltip-content">
+    <div class="item-name" [class]="getRarityClass(item()!.rarity)">
+      {{ item()!.name }}
+    </div>
+    
+    <div class="item-rarity">
+      {{ item()!.rarity }}
+    </div>
+    
+    @if (item()!.baseType) {
+      <div class="item-base-type">
+        {{ item()!.baseType }}
+      </div>
+    }
+    
+    @if (item()!.stats && item()!.stats.length > 0) {
+      <div class="stats-container">
+        @for (stat of item()!.stats; track stat.type) {
+          <div class="stat">
+            @if (stat.unit === 'flat') {
+              +{{ stat.value }} to {{ formatStatType(stat.type) }}
+            } @else if (stat.unit === 'percent') {
+              +{{ stat.value }}% {{ formatStatType(stat.type) }}
+            } @else if (stat.unit === 'average') {
+              Adds {{ stat.value }} {{ formatStatType(stat.type) }}
+            } @else if (stat.unit === 'effect') {
+              {{ formatStatType(stat.type) }}
+            } @else {
+              {{ stat.value }} {{ formatStatType(stat.type) }}
+            }
+          </div>
+        }
+      </div>
+    }
+  </div>
+} @else {
+  <div class="tooltip-content">
+    <div class="item-name empty">{{ slotName() }}</div>
+    <div class="item-rarity">Empty Slot</div>
+  </div>
+}

@@ -1,42 +1,28 @@
 .modal-content {
-  background: #232323 !important;
-  border-radius: 0.5rem;
-  box-shadow: 0 8px 32px #000a;
-  color: #fff;
-  opacity: 1 !important;
+  opacity: 1;
+  background: #1a1a1a;
+  border: 1px solid #444;
+  border-radius: 8px;
 }
 
 .modal-backdrop.show {
-  background: #111 !important;
-  opacity: 0.95 !important;
-  backdrop-filter: blur(2px);
+  opacity: 0.95;
   z-index: 1050;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(2px);
 }
 
 .modal {
   z-index: 1060;
 }
+
 .carousel-caption {
-  background: rgba(0, 0, 0, 0.55);
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
   border-radius: 0.5rem;
   padding: 1rem 1.5rem;
-  color: #fff !important;
+  color: #fff;
   text-shadow: 0 2px 8px #000, 0 0 2px #000;
   left: 5%;
   right: 5%;
-}
-
-.custom-backdrop {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
-  z-index: 1050;
-  background: rgba(0,0,0,0.5);
-}
-
-.custom-modal {
-  position: fixed;
-  top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1060;
 }

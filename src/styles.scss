@@ -1,23 +1,172 @@
-/* You can add global styles to this file, and also import other style files */
-body {
+:root {
+  --color-primary: #07394f;
+  --color-primary-light: #0b4f6a;
+  --color-background: #f8fafc;
+  --color-text: #fff;
+  --color-shadow: rgba(0, 0, 0, 0.25);
+  --color-modal-bg: #232323;
+  --color-backdrop: rgba(0, 0, 0, 0.5);
+  
+  --surface-dark: #181818;
+  --surface-secondary: #222;
+  --surface-muted: #444;
+  --surface-hover: #555;
+  
+  --border-color: #333;
+  --border-hover: #666;
+  --border-muted: #888;
+  
+  --text-primary: #fff;
+  --text-muted: #bbb;
+  --text-secondary: #aaa;
+  
+  --shadow-color: rgba(0, 0, 0, 1);
+  --shadow-base: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-elevated: 0 4px 12px rgba(0, 0, 0, 0.6);
+  
+  --sidebar-width: 16.5625rem;
+  --sidebar-collapsed-width: 5rem;
+  --sidebar-mobile-width: 100%;
+  --header-height: 4rem;
 
+  --transition: 0.3s;
+  --transition-base: all 0.2s ease;
+  --transition-long: all 0.4s ease;
+  --shadow-large: 0 8px 24px rgba(0, 0, 0, 0.6);
+  --shadow-modal: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-tooltip: 0 4px 8px rgba(0, 0, 0, 0.5);
+  
+  --border-radius: 10px;
+  --border-radius-small: 6px;
+  --border-radius-large: 12px;
+  
+  --legendary-color: #ffe066;
+  --rarity-normal: #c8c8c8;
+  --rarity-magic: #8888ff;
+  --rarity-rare: #ffff77;
+  --rarity-unique: #af6025;
+  
+  --skill-active: #3498db;
+  --support-gem: #9b59b6;
+  
+  --stat-default: #7fd3ed;
+  --stat-resistance: #ff6b6b;
+  --stat-damage: #ffd93d;
+  --stat-life: #ff6b6b;
+  --stat-energy: #6bcfff;
+  --stat-mana: #6b73ff;
+  
+  --font-size-small: 0.7rem;
+  --font-size-medium: 0.8rem;
+  --font-size-base: 0.9rem;
+  --font-size-large: 1rem;
+}
+
+html{
     margin: 0;
     padding: 0;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
     background: linear-gradient(135deg, #e0e7ff 0%, #f0f4ff 50%, #e0ecff 100%);
 }
 
-
-html{
-    
-    margin: 0;
-    padding: 0;
-}
 * {
     outline: none;
 }
 
-header {
+app-root {
+    display: block;
+    min-height: 100vh;
+}
 
+.game-container {
+  background: var(--color-dark-bg);
+  border: 2px solid var(--color-dark-border);
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--shadow-tooltip);
+  padding: 1rem;
+}
+
+.game-slot {
+  background: var(--color-slot-bg);
+  border: 1px solid var(--color-slot-border);
+  border-radius: var(--border-radius-small);
+  box-shadow: var(--shadow-slot);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-base);
+  
+  &:hover {
+    border-color: var(--color-slot-hover);
+    box-shadow: var(--shadow-slot-hover);
+  }
+}
+
+.game-tooltip {
+  display: none;
+  position: absolute;
+  background: var(--color-dark-bg);
+  color: var(--color-text);
+  border: 1px solid var(--color-slot-hover);
+  border-radius: var(--border-radius-small);
+  box-shadow: var(--shadow-tooltip);
+  z-index: 100;
+  pointer-events: none;
+  
+  &-title {
+    font-weight: bold;
+    margin-bottom: 6px;
+    color: #ffe066;
+    text-shadow: 0 1px 4px #000;
+  }
+  
+  &-content {
+    font-size: var(--font-size-medium);
+    color: var(--color-text-secondary);
+    margin-bottom: 8px;
+    font-style: italic;
+  }
+}
+
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.text-small {
+  font-size: var(--font-size-small);
+}
+
+.text-medium {
+  font-size: var(--font-size-medium);
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.modal-base {
+  background: var(--color-modal-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-modal);
+  color: var(--color-text);
+}
+
+.backdrop-base {
+  background: var(--color-backdrop);
+  backdrop-filter: blur(2px);
+}
+
+header {
     display: flex;
     padding-inline: 16px;
     padding-block: 8px;

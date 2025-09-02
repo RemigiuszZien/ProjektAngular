@@ -1,5 +1,17 @@
-import { Component, ChangeDetectionStrategy, input } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, computed, ViewContainerRef, inject, OnInit } from '@angular/core';
+import { Equipment } from '../../services/build-realtime.service';
+import { TooltipService } from '../../services/tooltip.service';
 
+interface SlotConfig {
+  id: string;
+  name: string;
+  gridArea: string;
+  size: 'small' | 'medium' | 'large';
+}
+
+interface SlotWithItem extends SlotConfig {
+  item: Equipment | null;
+}
 
 @Component({
   selector: 'app-equipment-grid',
@@ -7,60 +19,70 @@ import { Component, ChangeDetectionStrategy, input } from '@angular/core';
   styleUrl: './equipment-grid.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class Equipment {
-  readonly slots = input<any[]>();
+export class EquipmentGrid implements OnInit {
+  readonly slots = input<Equipment[]>();
+  
+  private readonly tooltipService = inject(TooltipService);
+  private readonly viewContainerRef = inject(ViewContainerRef);
 
-  private readonly SLOT_ORDER = [
-    'helmet',
-    'right-hand',
-    'left-hand',
-    'chest',
-    'left-ring',
-    'right-ring',
-    'amulet',
-    'belt',
-    'gloves',
-    'boots',
-    'flask1',
-    'flask2',
-    'flask3',
-    'flask4',
-    'flask5',
+  ngOnInit(): void {
+    this.tooltipService.setViewContainer(this.viewContainerRef);
+  }
+
+  onSlotHover(event: MouseEvent, slot: SlotWithItem): void {
+    const rect = (event.target as HTMLElement).getBoundingClientRect();
+    this.tooltipService.showTooltip(
+      slot.item, 
+      slot.name, 
+      event.clientX, 
+      event.clientY
+    );
+  }
+
+  onSlotLeave(): void {
+    this.tooltipService.hideTooltip();
+  }
+
+  onSlotMouseMove(event: MouseEvent): void {
+    this.tooltipService.updatePosition(event.clientX, event.clientY);
+  }
+
+  private readonly SLOT_CONFIGS: SlotConfig[] = [
+    { id: 'helmet', name: 'Helmet', gridArea: 'helmet', size: 'medium' },
+    { id: 'amulet', name: 'Amulet', gridArea: 'amulet', size: 'small' },
+    { id: 'left-hand', name: 'Left Hand', gridArea: 'left-hand', size: 'large' },
+    { id: 'chest', name: 'Chest', gridArea: 'chest', size: 'large' },
+    { id: 'right-hand', name: 'Right Hand', gridArea: 'right-hand', size: 'large' },
+    { id: 'left-ring', name: 'Left Ring', gridArea: 'left-ring', size: 'small' },
+    { id: 'belt', name: 'Belt', gridArea: 'belt', size: 'medium' },
+    { id: 'right-ring', name: 'Right Ring', gridArea: 'right-ring', size: 'small' },
+    { id: 'gloves', name: 'Gloves', gridArea: 'gloves', size: 'medium' },
+    { id: 'boots', name: 'Boots', gridArea: 'boots', size: 'medium' },
+    { id: 'flask1', name: 'Flask 1', gridArea: 'flask1', size: 'small' },
+    { id: 'flask2', name: 'Flask 2', gridArea: 'flask2', size: 'small' },
+    { id: 'flask3', name: 'Flask 3', gridArea: 'flask3', size: 'small' },
+    { id: 'flask4', name: 'Flask 4', gridArea: 'flask4', size: 'small' },
+    { id: 'flask5', name: 'Flask 5', gridArea: 'flask5', size: 'small' },
   ];
-  private readonly SLOT_MAP: Record<string, string> = {
-    'helmet': 'helmet',
-    'left-hand': 'left-hand',
-    'right-hand': 'right-hand',
-    'chest': 'chest',
-    'left-ring': 'left-ring',
-    'right-ring': 'right-ring',
-    'amulet': 'amulet',
-    'belt': 'belt',
-    'gloves': 'gloves',
-    'boots': 'boots',
-    'flask1': 'flask1',
-    'flask2': 'flask2',
-    'flask3': 'flask3',
-    'flask4': 'flask4',
-    'flask5': 'flask5',
-  };
 
-
-  getSlotClass(slot: string): string {
-    return 'poe-slot-' + (this.SLOT_MAP[slot] ?? slot);
+  getSlotConfig(slotId: string): SlotConfig {
+    return this.SLOT_CONFIGS.find(config => config.id === slotId) || 
+           { id: slotId, name: slotId, gridArea: slotId, size: 'medium' };
   }
 
-  fixIconPath(icon: string | undefined): string | undefined {
-    if (!icon) return undefined;
-    return icon.startsWith('public/') ? icon.replace('public/', '/') : icon;
-  }
-
-
-  get canonicalSlots() {
+  canonicalSlots = computed((): SlotWithItem[] => {
     const slots = this.slots() ?? [];
-    return this.SLOT_ORDER.map(slotName => {
-      const found = slots.find((s: any) => s.slot === slotName);
-      return found ? { slot: slotName, item: found } : { slot: slotName };
+    const result = this.SLOT_CONFIGS.map(config => {
+      const found = slots.find((s: Equipment) => s.slot === config.id);
+      const slotData = found ? { 
+        ...config, 
+        item: found 
+      } : { 
+        ...config, 
+        item: null 
+      };
+      return slotData;
     });
-  }
+    return result;
+  });
 }

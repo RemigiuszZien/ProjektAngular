@@ -1,27 +1,24 @@
-<div class="poe-equipment-grid-wrapper">
-  <div class="poe-equipment-grid">
-    @for (slot of canonicalSlots; track slot.slot) {
-      <div class="poe-slot {{getSlotClass(slot.slot)}}">
+<div class="equipment-wrapper">
+  <div class="equipment-grid">
+    @for (slot of canonicalSlots(); track slot.id) {
+      <div class="slot" 
+           [attr.data-slot]="slot.id" 
+           [style.grid-area]="slot.id"
+           (mouseenter)="onSlotHover($event, slot)"
+           (mouseleave)="onSlotLeave()"
+           (mousemove)="onSlotMouseMove($event)">
+        
         @if (slot.item) {
-          <div class="item-tooltip-wrapper">
-            @if (slot.item.icon) {
-              <img [src]="fixIconPath(slot.item.icon)" [alt]="slot.item.name" class="item-icon" />
-            } @else {
-              <div class="item-name-placeholder">{{ slot.item.name }}</div>
-            }
-            <div class="item-tooltip">
-              <div class="item-tooltip-title">{{ slot.item.name }}</div>
-              <ul class="item-tooltip-lines">
-                @for (line of slot.item.lines; track line) {
-                  <li>{{ line }}</li>
-                }
-              </ul>
-            </div>
-          </div>
+          @if (slot.item.icon) {
+            <img [src]="slot.item.icon" [alt]="slot.item.name" class="icon" />
+          } @else {
+            <div class="placeholder">{{ slot.item.name }}</div>
+          }
         } @else {
-          <div class="empty-slot">{{ slot.slot }}</div>
+          <span class="label">{{ slot.name }}</span>
         }
       </div>
     }
   </div>
 </div>
+

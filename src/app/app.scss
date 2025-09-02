@@ -4,8 +4,8 @@
 }
 
 app-sidebar, .sidenav {
-  position: relative; 
-  height: auto;
+  position: relative;
+  align-self: stretch;
   width: var(--sidebar-width);
   flex: 0 0 var(--sidebar-width);
   transition: width var(--transition) ease;
@@ -13,9 +13,81 @@ app-sidebar, .sidenav {
 
 .app-content {
   flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 
-app-sidebar.sidenav-collapsed, .sidenav.sidenav-collapsed {
-  width: var(--sidebar-collapsed-width) !important;
+.app-layout app-sidebar.sidenav-collapsed, 
+.app-layout .sidenav.sidenav-collapsed {
+  width: var(--sidebar-collapsed-width);
   flex: 0 0 var(--sidebar-collapsed-width);
+}
+
+@media (max-width: 768px) {
+  .app-layout {
+    flex-direction: column;
+  }
+
+  app-sidebar, .sidenav {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: var(--sidebar-mobile-width);
+    height: 100vh;
+    z-index: 1000;
+    transition: left var(--transition) ease;
+    flex: none;
+
+    &.mobile-open {
+      left: 0;
+    }
+  }
+
+  .app-content {
+    width: 100%;
+    padding-top: var(--header-height);
+  }
+
+  .mobile-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
+    background: var(--surface-secondary);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1rem;
+  }
+
+  .mobile-menu-btn {
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .mobile-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition) ease;
+
+    &.active {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
 }

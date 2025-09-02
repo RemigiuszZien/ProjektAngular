@@ -15,7 +15,7 @@ export class Carousel implements AfterViewInit, OnDestroy {
   showBuilds = output<Slide>();
   @ViewChild('carouselRoot', { static: true }) carouselRoot!: ElementRef<HTMLElement>;
   showBuildsLabel = input('Pokaż buildy');
-  captionTemplate = input<TemplateRef<any> | undefined>(undefined);
+  captionTemplate = input<TemplateRef<{ $implicit: Slide }> | null>(null);
   private bsCarousel?: InstanceType<typeof BSCarousel>;
   ngAfterViewInit(): void {
     this.bsCarousel = new BSCarousel(this.carouselRoot.nativeElement, {
