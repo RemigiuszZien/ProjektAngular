@@ -6,21 +6,16 @@ import { Injectable } from '@angular/core';
 export class AssetPathService {
   
   getAssetPath(relativePath: string): string {
-    // Usuń początkowy slash jeśli istnieje
     const cleanPath = relativePath.startsWith('/') ? relativePath.slice(1) : relativePath;
 
-    // Pobierz baseHref z dokumentu
     const baseHref = document.querySelector('base')?.getAttribute('href') || '/';
     console.log('AssetPath - baseHref:', baseHref, 'cleanPath:', cleanPath);
 
-    // Jeśli baseHref to tylko '/', zwróć zwykłą względną ścieżkę
     if (baseHref === '/') {
       console.log('AssetPath - returning local path:', cleanPath);
       return cleanPath;
     }
 
-    // W przeciwnym wypadku utwórz pełną ścieżkę
-    // Upewnij się, że baseHref kończy się slashem ale nie zaczyna podwójnym slashem
     let normalizedBaseHref = baseHref;
     if (!normalizedBaseHref.endsWith('/')) {
       normalizedBaseHref += '/';
@@ -34,12 +29,21 @@ export class AssetPathService {
   getItemIconPath(iconPath: string): string {
     console.log('Original iconPath:', iconPath);
     
+    // Jeśli to już pełny URL, zwróć bez zmian
     if (iconPath.startsWith('http://') || iconPath.startsWith('https://') || iconPath.startsWith('data:')) {
       console.log('Returning full URL:', iconPath);
       return iconPath;
     }
     
-    const result = this.getAssetPath(iconPath);
+    // Jeśli ścieżka nie zawiera katalogu, dodaj domyślny prefix dla ikon itemów
+    let fullPath = iconPath;
+    if (!iconPath.includes('/')) {
+      // Jeśli to tylko nazwa pliku, dodaj prefix icons/items/
+      fullPath = `icons/items/${iconPath}`;
+      console.log('Added icons/items prefix:', fullPath);
+    }
+    
+    const result = this.getAssetPath(fullPath);
     console.log('Generated path:', result);
     console.log('Base href:', document.querySelector('base')?.getAttribute('href'));
     return result;
