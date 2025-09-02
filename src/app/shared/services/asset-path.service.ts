@@ -5,36 +5,43 @@ import { Injectable } from '@angular/core';
 })
 export class AssetPathService {
   
-  /**
-   * Zwraca pełną ścieżkę do pliku w folderze assets.
-   * Automatycznie dodaje baseHref dla GitHub Pages.
-   */
   getAssetPath(relativePath: string): string {
     // Usuń początkowy slash jeśli istnieje
     const cleanPath = relativePath.startsWith('/') ? relativePath.slice(1) : relativePath;
-    
+
     // Pobierz baseHref z dokumentu
     const baseHref = document.querySelector('base')?.getAttribute('href') || '/';
-    
+    console.log('AssetPath - baseHref:', baseHref, 'cleanPath:', cleanPath);
+
     // Jeśli baseHref to tylko '/', zwróć zwykłą względną ścieżkę
     if (baseHref === '/') {
+      console.log('AssetPath - returning local path:', cleanPath);
       return cleanPath;
     }
+
+    // W przeciwnym wypadku utwórz pełną ścieżkę
+    // Upewnij się, że baseHref kończy się slashem ale nie zaczyna podwójnym slashem
+    let normalizedBaseHref = baseHref;
+    if (!normalizedBaseHref.endsWith('/')) {
+      normalizedBaseHref += '/';
+    }
     
-    // W przeciwnym wypadku dodaj baseHref
-    const normalizedBaseHref = baseHref.endsWith('/') ? baseHref : baseHref + '/';
-    return normalizedBaseHref + cleanPath;
+    const result = normalizedBaseHref + cleanPath;
+    console.log('AssetPath - returning GitHub path:', result);
+    return result;
   }
-  
-  /**
-   * Zwraca pełną ścieżkę do ikony itemu.
-   */
+
   getItemIconPath(iconPath: string): string {
-    // Jeśli ścieżka jest już pełnym URL, zwróć ją bez zmian
+    console.log('Original iconPath:', iconPath);
+    
     if (iconPath.startsWith('http://') || iconPath.startsWith('https://') || iconPath.startsWith('data:')) {
+      console.log('Returning full URL:', iconPath);
       return iconPath;
     }
     
-    return this.getAssetPath(iconPath);
+    const result = this.getAssetPath(iconPath);
+    console.log('Generated path:', result);
+    console.log('Base href:', document.querySelector('base')?.getAttribute('href'));
+    return result;
   }
 }
