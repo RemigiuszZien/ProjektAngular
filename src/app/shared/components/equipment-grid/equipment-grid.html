@@ -10,7 +10,7 @@
         
         @if (slot.item) {
           @if (slot.item.icon) {
-            <img [src]="slot.item.icon" [alt]="slot.item.name" class="icon" />
+            <img [src]="getItemIconPath(slot.item.icon)" [alt]="slot.item.name" class="icon" />
           } @else {
             <div class="placeholder">{{ slot.item.name }}</div>
           }

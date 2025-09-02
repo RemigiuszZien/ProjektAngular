@@ -1,6 +1,7 @@
 import { Component, ChangeDetectionStrategy, input, computed, ViewContainerRef, inject, OnInit } from '@angular/core';
 import { Equipment } from '../../services/build-realtime.service';
 import { TooltipService } from '../../services/tooltip.service';
+import { AssetPathService } from '../../services/asset-path.service';
 
 interface SlotConfig {
   id: string;
@@ -24,6 +25,7 @@ export class EquipmentGrid implements OnInit {
   
   private readonly tooltipService = inject(TooltipService);
   private readonly viewContainerRef = inject(ViewContainerRef);
+  private readonly assetPathService = inject(AssetPathService);
 
   ngOnInit(): void {
     this.tooltipService.setViewContainer(this.viewContainerRef);
@@ -85,4 +87,8 @@ export class EquipmentGrid implements OnInit {
     });
     return result;
   });
+
+  getItemIconPath(iconPath: string): string {
+    return this.assetPathService.getItemIconPath(iconPath);
+  }
 }
