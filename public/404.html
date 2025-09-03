@@ -6,9 +6,20 @@
   <base href="/ProjektAngular/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <script>
+    // Only redirect to Angular app for routes, not static files
+    var path = window.location.pathname;
+    var isStaticFile = /\.(png|jpg|jpeg|gif|svg|ico|css|js|woff|woff2|ttf|eot)$/i.test(path);
+    
+    if (isStaticFile) {
+      // For static files, show a simple 404 message
+      document.write('<h1>404 - File Not Found</h1><p>The requested file was not found.</p>');
+    } else {
+      // For routes, load the Angular app
+      document.write('<app-root></app-root>');
+    }
+  </script>
 </head>
 <body>
-  <app-root></app-root>
-
 </body>
 </html>
