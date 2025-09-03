@@ -9,7 +9,7 @@ export class AssetPathService {
     const cleanPath = relativePath.startsWith('/') ? relativePath.slice(1) : relativePath;
     const baseHref = document.querySelector('base')?.getAttribute('href') || '/';
     if (baseHref.includes('github.io')) {
-      return './' + cleanPath;
+      return 'https://remigiuszzien.github.io/ProjektAngular/' + cleanPath;
     }
 
     if (baseHref === '/') {
