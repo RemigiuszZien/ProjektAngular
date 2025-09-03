@@ -34,9 +34,6 @@ jobs:
       - name: Build Angular app
         run: npm run build:gh-pages
         
-      - name: Copy index.html as 404.html for SPA routing
-        run: cp dist/pierwszy-projekt/browser/index.html dist/pierwszy-projekt/browser/404.html
-        
       - name: Setup Pages
         uses: actions/configure-pages@v4
         
