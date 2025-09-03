@@ -8,6 +8,9 @@ export class AssetPathService {
   getAssetPath(relativePath: string): string {
     const cleanPath = relativePath.startsWith('/') ? relativePath.slice(1) : relativePath;
     const baseHref = document.querySelector('base')?.getAttribute('href') || '/';
+    if (baseHref.includes('github.io')) {
+      return './' + cleanPath;
+    }
 
     if (baseHref === '/') {
       return cleanPath;
