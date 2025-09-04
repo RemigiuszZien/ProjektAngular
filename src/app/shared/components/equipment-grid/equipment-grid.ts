@@ -1,7 +1,8 @@
-import { Component, ChangeDetectionStrategy, input, computed, ViewContainerRef, inject, OnInit } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, computed, ViewContainerRef, inject, OnInit, effect } from '@angular/core';
 import { Equipment } from '../../services/build-realtime.service';
 import { TooltipService } from '../../services/tooltip.service';
 import { AssetPathService } from '../../services/asset-path.service';
+import { ImagePreloadService } from '../../services/image-preload.service';
 
 interface SlotConfig {
   id: string;
@@ -26,22 +27,47 @@ export class EquipmentGrid implements OnInit {
   private readonly tooltipService = inject(TooltipService);
   private readonly viewContainerRef = inject(ViewContainerRef);
   private readonly assetPathService = inject(AssetPathService);
+  private readonly imagePreloadService = inject(ImagePreloadService);
+  private hoverTimeout: number | null = null;
+
+  constructor() {
+    effect(() => {
+      const equipment = this.slots();
+      if (equipment?.length) {
+        const iconPaths = equipment
+          .filter(item => item.icon)
+          .map(item => this.getItemIconPath(item.icon!));
+        
+        this.imagePreloadService.preloadImages(iconPaths);
+      }
+    });
+  }
 
   ngOnInit(): void {
     this.tooltipService.setViewContainer(this.viewContainerRef);
   }
 
   onSlotHover(event: MouseEvent, slot: SlotWithItem): void {
-    const rect = (event.target as HTMLElement).getBoundingClientRect();
-    this.tooltipService.showTooltip(
-      slot.item, 
-      slot.name, 
-      event.clientX, 
-      event.clientY
-    );
+    if (this.hoverTimeout) {
+      clearTimeout(this.hoverTimeout);
+    }
+
+    this.hoverTimeout = window.setTimeout(() => {
+      const rect = (event.target as HTMLElement).getBoundingClientRect();
+      this.tooltipService.showTooltip(
+        slot.item, 
+        slot.name, 
+        event.clientX, 
+        event.clientY
+      );
+    }, 50);
   }
 
   onSlotLeave(): void {
+    if (this.hoverTimeout) {
+      clearTimeout(this.hoverTimeout);
+      this.hoverTimeout = null;
+    }
     this.tooltipService.hideTooltip();
   }
 

@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, signal, computed, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BuildRealtimeService } from '../../shared/services/build-realtime.service';
 import { BuildImageService } from '../../shared/services/build-image.service';
 import { EquipmentGrid } from '../../shared/components/equipment-grid/equipment-grid';
@@ -14,6 +14,7 @@ import { SkillGemsComponent } from '../../shared/components/skill-gems/skill-gem
 })
 export class BuildDetailsComponent {
   private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
   private readonly buildService = inject(BuildRealtimeService);
   private readonly imageService = inject(BuildImageService);
   private readonly buildId = signal<string>('');
@@ -46,7 +47,11 @@ export class BuildDetailsComponent {
   }
 
   goBack(): void {
-    window.history.back();
+    if (window.history.length > 1) {
+      window.history.back();
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
   retryLoad(): void {

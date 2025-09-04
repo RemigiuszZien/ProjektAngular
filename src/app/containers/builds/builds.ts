@@ -2,12 +2,14 @@ import { Component, ChangeDetectionStrategy, computed, signal, inject, effect, E
 import { Router, ActivatedRoute } from '@angular/router';
 import { BuildRealtimeService, BuildRealtimeDoc } from '../../shared/services/build-realtime.service';
 import { BuildImageService } from '../../shared/services/build-image.service';
+import { LoadingSpinnerComponent } from '../../shared/components/loading-spinner/loading-spinner';
 
 @Component({
   selector: 'app-builds',
   templateUrl: './builds.html',
   styleUrl: './builds.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [LoadingSpinnerComponent]
 })
 export class BuildsComponent {
   @ViewChild('classSelect') classSelect!: ElementRef<HTMLSelectElement>;
@@ -19,6 +21,8 @@ export class BuildsComponent {
 
   readonly selectedClass = signal<string>('');
   readonly availableClasses = ['Shadow', 'Templar', 'Duelist', 'Witch', 'Marauder', 'Ranger', 'Scion'];
+  private readonly retryCount = signal<number>(0);
+  private readonly maxRetries = 3;
   
   readonly builds = computed(() => {
     const className = this.selectedClass();
@@ -27,6 +31,13 @@ export class BuildsComponent {
     }
     return this.buildService.getBuilds();
   });
+
+  readonly buildImages = computed(() => 
+    this.builds().reduce((acc, build) => {
+      acc[build.id] = this.imageService.getBuildImage(build.name, build.class, build.image);
+      return acc;
+    }, {} as Record<string, string>)
+  );
 
   readonly selectedClassValue = computed(() => this.selectedClass());
   readonly loading = this.buildService.loading;
@@ -54,15 +65,38 @@ export class BuildsComponent {
   }
 
   goBack() {
-    window.history.back();
+    if (window.history.length > 1) {
+      window.history.back();
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
   retryLoad() {
-    this.buildService.refreshBuilds();
+    const currentRetry = this.retryCount();
+    
+    if (currentRetry >= this.maxRetries) {
+      console.warn('Maximum retry attempts reached');
+      return;
+    }
+
+    this.retryCount.set(currentRetry + 1);
+    
+    const delay = Math.pow(2, currentRetry) * 1000;
+    
+    setTimeout(() => {
+      this.buildService.refreshBuilds();
+
+      setTimeout(() => {
+        if (this.buildService.errorMessage() === null) {
+          this.retryCount.set(0);
+        }
+      }, 2000);
+    }, delay);
   }
 
-  getBuildImage(build: BuildRealtimeDoc): string {
-    return this.imageService.getBuildImage(build.name, build.class, (build as any).image);
+  getBuildImage(buildId: string): string {
+    return this.buildImages()[buildId] || '';
   }
 
   onClassChange(event: Event) {

@@ -42,13 +42,6 @@
   transition: var(--transition-base);
 }
 
-.toggle-btn {
-  @extend %button-base;
-  background-color: rgba(255, 255, 255, 0.06);
-  color: var(--color-background);
-  padding: 0 0.75rem;
-}
-
 %nav-list {
   list-style: none;
   padding: 0.75rem;
@@ -97,23 +90,6 @@
   @extend %nav-link-base, %nav-link-colors;
 }
 
-.active {
-  background-color: rgba(255, 255, 255, 0.85);
-  color: #0b2a39;
-}
-
-.sidenav.sidenav-collapsed .sidenav-link-text {
-  display: inline-block;
-  width: 100%;
-}
-
-.sidenav-link-icon {
-  display: inline-block;
-  font-size: 1.5em;
-  text-align: center;
-  width: 2em;
-}
-
 @media (max-width: 768px) {
   .sidenav {
     width: 100%;
@@ -128,24 +104,5 @@
   .sidenav-top {
     padding: 1rem 0.75rem;
     border-bottom: 1px solid var(--border-color);
-  }
-
-  .toggle-btn {
-    padding: 0.5rem 1rem;
-    font-size: 1.1rem;
-  }
-
-  .sidenav-nav {
-    padding-top: 1rem;
-  }
-
-  .sidenav-link {
-    padding: 1rem 1.5rem;
-    font-size: 1.1rem;
-  }
-
-  .sidenav-link-icon {
-    width: 2.5em;
-    font-size: 1.3em;
   }
 }

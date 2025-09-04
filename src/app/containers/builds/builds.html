@@ -21,10 +21,7 @@
   </div>
   
   @if (loading()) {
-    <div class="loading-spinner">
-      <div class="spinner"></div>
-      <p>Ładowanie buildów...</p>
-    </div>
+    <app-loading-spinner message="Ładowanie buildów..."></app-loading-spinner>
   } @else if (error()) {
     <div class="error-message">
       <p>Błąd: {{ error() }}</p>
@@ -37,7 +34,7 @@
       @for (build of builds(); track build.id) {
         <div class="build-card" (click)="goToBuild(build.id)">
           <div class="build-image">
-            <img [src]="getBuildImage(build)" [alt]="build.name" loading="lazy">
+            <img [src]="getBuildImage(build.id)" [alt]="build.name" loading="lazy">
           </div>
           <div class="build-info">
             <h3>{{ build.name }}</h3>

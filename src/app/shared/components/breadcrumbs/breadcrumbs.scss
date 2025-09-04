@@ -39,12 +39,12 @@
     font-size: inherit;
 
     &:hover {
-      color: var(--accent-primary);
-      background: var(--surface-hover);
+      color: #3b82f6;
+      background: #f8fafc;
     }
 
     &:focus {
-      outline: 2px solid var(--accent-primary);
+      outline: 2px solid #3b82f6;
       outline-offset: 2px;
     }
   }
