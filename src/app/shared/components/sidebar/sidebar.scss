@@ -1,11 +1,8 @@
-%nav-base {
+.sidenav {
   background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
   color: var(--color-background);
   box-shadow: var(--shadow-base);
   transition: var(--transition-long);
-}
-
-%nav-layout {
   position: relative;
   height: 100%;
   z-index: 1000;
@@ -15,10 +12,6 @@
   flex-direction: column;
   padding: 0.5rem 0;
   overflow: hidden;
-}
-
-.sidenav {
-  @extend %nav-base, %nav-layout;
   width: 16.5625rem;
 
   &.sidenav-collapsed {
@@ -33,7 +26,7 @@
   width: 100%;
 }
 
-%button-base {
+.toggle-btn {
   cursor: pointer;
   height: 2.25rem;
   border-radius: var(--border-radius-small);
@@ -42,7 +35,7 @@
   transition: var(--transition-base);
 }
 
-%nav-list {
+.sidenav-nav {
   list-style: none;
   padding: 0.75rem;
   margin: 0;
@@ -53,41 +46,30 @@
   align-items: stretch;
 }
 
-.sidenav-nav {
-  @extend %nav-list;
-}
-
 .sidenav-nav-item {
   width: 100%;
-}
 
-%nav-link-base {
-  display: flex;
-  align-items: center;
-  height: 3rem;
-  text-decoration: none;
-  border-radius: var(--border-radius);
-  padding: 0 1rem;
-  transition: var(--transition-base);
-  font-weight: 600;
-  font-size: 0.95rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-%nav-link-colors {
-  color: #e6f0f6;
-  
-  &:hover,
-  &:focus {
-    background-color: rgba(255, 255, 255, 0.12);
-    color: #ffffff;
+  a {
+    display: flex;
+    align-items: center;
+    height: 3rem;
+    text-decoration: none;
+    border-radius: var(--border-radius);
+    padding: 0 1rem;
+    transition: var(--transition-base);
+    font-weight: 600;
+    font-size: 0.95rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #e6f0f6;
+    
+    &:hover,
+    &:focus {
+      background-color: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+    }
   }
-}
-
-.sidenav-nav-link {
-  @extend %nav-link-base, %nav-link-colors;
 }
 
 @media (max-width: 768px) {

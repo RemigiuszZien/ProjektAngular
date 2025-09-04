@@ -7,7 +7,6 @@
     @for (item of items(); track item.routeLink) {
       <li class="sidenav-nav-item">
         <a
-          class="sidenav-nav-link"
           [routerLink]="item.routeLink"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: true }"
