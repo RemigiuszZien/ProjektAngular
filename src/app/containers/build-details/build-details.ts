@@ -10,7 +10,6 @@ import { SkillGemsComponent } from '../../shared/components/skill-gems/skill-gem
   templateUrl: './build-details.html',
   styleUrls: ['./build-details.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [EquipmentGrid, SkillGemsComponent],
 })
 export class BuildDetailsComponent {
@@ -28,6 +27,16 @@ export class BuildDetailsComponent {
   readonly skillgems = computed(() => this.build()?.skillgems ?? []);
   readonly loading = this.buildService.loading;
   readonly error = this.buildService.errorMessage;
+  
+  readonly buildImage = computed(() => {
+    const currentBuild = this.build();
+    if (!currentBuild) return '';
+    return this.imageService.getBuildImage(
+      currentBuild.name,
+      currentBuild.class,
+      (currentBuild as any).image
+    );
+  });
 
   constructor() {
     this.route.paramMap.subscribe(params => {
@@ -42,15 +51,5 @@ export class BuildDetailsComponent {
 
   retryLoad(): void {
     this.buildService.refreshBuilds();
-  }
-
-  getBuildImage(): string {
-    const currentBuild = this.build();
-    if (!currentBuild) return '';
-    return this.imageService.getBuildImage(
-      currentBuild.name,
-      currentBuild.class,
-      (currentBuild as any).image
-    );
   }
 }

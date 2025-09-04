@@ -1,6 +1,24 @@
 <div class="builds-list">
   <button class="btn btn-secondary mb-3" (click)="goBack()">&larr; Powrót</button>
-  <h2>Buildy dla klasy: {{ selectedClassName() }}</h2>
+  
+  <div class="builds-header">
+    <div class="class-selector">
+      <label for="class-select">Wybierz klasę:</label>
+      <select #classSelect id="class-select" [value]="selectedClassValue()" (change)="onClassChange($event)" class="form-select">
+        <option value="">Wszystkie klasy</option>
+        @for (className of availableClasses; track className) {
+          <option [value]="className">{{ className }}</option>
+        }
+      </select>
+    </div>
+    <h2>
+      @if (selectedClass()) {
+        Buildy dla klasy: {{ selectedClass() }}
+      } @else {
+        Wszystkie buildy
+      }
+    </h2>
+  </div>
   
   @if (loading()) {
     <div class="loading-spinner">

@@ -27,11 +27,11 @@
   &.rarity-magic { color: var(--rarity-magic, #8888ff); }
   &.rarity-rare { color: var(--rarity-rare, #ffff77); }
   &.rarity-unique { color: var(--rarity-unique, #af6025); }
-  &.empty { color: #888; }
+  &.empty { color: var(--text-secondary); }
 }
 
 .item-rarity {
-  color: #999;
+  color: var(--text-secondary);
   margin-bottom: 10px;
   text-transform: capitalize;
   font-style: italic;
@@ -39,7 +39,7 @@
 }
 
 .item-base-type {
-  color: #ccc;
+  color: var(--text-muted);
   margin-bottom: 10px;
   font-size: 0.85rem;
 }
@@ -52,7 +52,7 @@
 
 .stat {
   margin-bottom: 4px;
-  color: #87cefa;
+  color: var(--stat-default, #87cefa);
   font-size: 0.85rem;
   text-transform: capitalize;
   

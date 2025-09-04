@@ -4,9 +4,8 @@ import { Equipment } from '../../services/build-realtime.service';
 @Component({
   selector: 'app-tooltip',
   templateUrl: './tooltip.html',
-  styleUrls: ['./tooltip.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true
+  styleUrl: './tooltip.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TooltipComponent {
   readonly item = input<Equipment>();

@@ -18,7 +18,7 @@
   } @else {
     <div class="build-header">
       <div class="build-image">
-        <img [src]="getBuildImage()" [alt]="build()?.name" loading="lazy">
+        <img [src]="buildImage()" [alt]="build()?.name" loading="lazy">
       </div>
       <div class="build-meta">
         <h1>{{ build()?.name }}</h1>
