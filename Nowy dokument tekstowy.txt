@@ -1,0 +1,9 @@
+containers/pages w app - tutaj home
+dodać folder shared
+dodać folder models
+services
+todd motto
+
+nowy komponent carousel - ma przyjmować zmienne lista elementów do carousel, funkcję otwierającą pop up - syntax z nazwa zmiennej = input/output
+
+nowy container na widok konkretnego buildu.

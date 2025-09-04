@@ -1,1 +1,110 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --color-primary: #07394f;
+  --color-primary-light: #0b4f6a;
+  --color-background: #f8fafc;
+  --color-text: #fff;
+  --color-shadow: rgba(0, 0, 0, 0.25);
+  --color-modal-bg: #232323;
+  --color-backdrop: rgba(0, 0, 0, 0.5);
+  
+  --surface-dark: #181818;
+  --surface-secondary: #222;
+  --surface-muted: #444;
+  --surface-hover: #555;
+  
+  --border-color: #333;
+  --border-hover: #666;
+  --border-muted: #888;
+  
+  --text-primary: #fff;
+  --text-muted: #d1d5db;
+  --text-secondary: #e5e7eb;
+  
+  --accent-primary: #3b82f6;
+  
+  --shadow-color: rgba(0, 0, 0, 1);
+  --shadow-base: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-elevated: 0 4px 12px rgba(0, 0, 0, 0.6);
+  
+  --sidebar-width: 16.5625rem;
+  --sidebar-collapsed-width: 5rem;
+  --sidebar-mobile-width: 100%;
+  --header-height: 4rem;
+
+  --transition: 0.3s;
+  --transition-base: all 0.2s ease;
+  --transition-long: all 0.4s ease;
+  --shadow-large: 0 8px 24px rgba(0, 0, 0, 0.6);
+  --shadow-modal: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-tooltip: 0 4px 8px rgba(0, 0, 0, 0.5);
+  
+  --border-radius: 10px;
+  --border-radius-small: 6px;
+  --border-radius-large: 12px;
+  
+  --legendary-color: #ffe066;
+  --rarity-normal: #c8c8c8;
+  --rarity-magic: #8888ff;
+  --rarity-rare: #ffff77;
+  --rarity-unique: #af6025;
+  
+  --skill-active: #3498db;
+  --support-gem: #9b59b6;
+  
+  --stat-default: #7fd3ed;
+  --stat-resistance: #ff6b6b;
+  --stat-damage: #ffd93d;
+  --stat-life: #ff6b6b;
+  --stat-energy: #6bcfff;
+  --stat-mana: #6b73ff;
+  
+  --font-size-small: 0.7rem;
+  --font-size-medium: 0.8rem;
+  --font-size-base: 0.9rem;
+  --font-size-large: 1rem;
+  
+  --color-dark-bg: #181818;
+  --color-dark-border: #333;
+  --color-slot-bg: #222;
+  --color-slot-border: #333;
+  --color-slot-hover: #666;
+  --color-text-secondary: #e5e7eb;
+  --color-text-muted: #d1d5db;
+  --shadow-slot: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-slot-hover: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+html{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: linear-gradient(135deg, #e0e7ff 0%, #f0f4ff 50%, #e0ecff 100%);
+}
+
+* {
+    outline: none;
+}
+
+app-root {
+    display: block;
+    min-height: 100vh;
+}
+
+header {
+    display: flex;
+    padding-inline: 16px;
+    padding-block: 8px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

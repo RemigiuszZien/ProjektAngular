@@ -1,0 +1,17 @@
+<header class="app-header">
+  <h1>Buildy Path of Exile</h1>
+  
+  @if (user()) {
+    <div class="user-menu">
+      <div>
+        @if (user()?.photoURL) {
+          <img [src]="user()!.photoURL!" [alt]="user()!.displayName || 'User'">
+        }
+        <span>{{ user()!.displayName }}</span>
+      </div>
+      <button (click)="signOut()">
+        Wyloguj
+      </button>
+    </div>
+  }
+</header>

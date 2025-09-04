@@ -1,0 +1,245 @@
+.build-details {
+  padding: 2rem;
+  min-height: 60vh;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .loading-container, 
+  .error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 40vh;
+    gap: 1.5rem;
+
+    .loading-spinner {
+      width: 3rem;
+      height: 3rem;
+      border: 3px solid var(--border-color);
+      border-top: 3px solid var(--accent-primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    .loading-text {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+    }
+
+    .error-message {
+      color: var(--danger-color);
+      text-align: center;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    button {
+      background: var(--accent-primary);
+      border: none;
+      color: var(--text-primary);
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.2s;
+
+      &:hover {
+        background: var(--accent-hover);
+      }
+    }
+  }
+
+  .build-content {
+    animation: fadeIn 0.3s ease-in;
+  }
+
+  .build-header {
+    position: relative;
+    margin-bottom: 2rem;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-base);
+
+    .build-image {
+      width: 100%;
+      height: 300px;
+      position: relative;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0.3) 0%,
+          rgba(0, 0, 0, 0.6) 70%,
+          rgba(0, 0, 0, 0.8) 100%
+        );
+        pointer-events: none;
+      }
+    }
+
+    .build-meta {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2rem;
+      z-index: 1;
+
+      h1 {
+        color: #ffffff;
+        margin: 0 0 0.5rem 0;
+        font-size: 2.5rem;
+        font-weight: 700;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9);
+        line-height: 1.2;
+      }
+
+      .build-class {
+        color: #ffffff;
+        font-size: 1.4rem;
+        margin: 0;
+        text-transform: capitalize;
+        font-weight: 600;
+        text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+        opacity: 0.9;
+      }
+    }
+  }
+
+  .back-button {
+    background: var(--surface-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    margin-bottom: 1.5rem;
+    transition: all 0.2s;
+
+    &:hover {
+      background: var(--surface-hover);
+      border-color: var(--accent-primary);
+    }
+  }
+
+  .equipment-section,
+  .skillgems-section {
+    margin-top: 1.5rem;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .build-details {
+    padding: 1rem;
+
+    .build-header {
+      flex-direction: column;
+      text-align: center;
+      gap: 1rem;
+
+      .build-image {
+        width: 150px;
+        height: 113px;
+        align-self: center;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+    }
+
+    .equipment-section,
+    .skillgems-section {
+      margin-top: 1rem;
+    }
+
+    .loading-container, .error-container {
+      min-height: 30vh;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .build-details {
+    padding: 0.75rem;
+
+    .build-header {
+      .build-image {
+        height: 250px;
+      }
+
+      .build-meta {
+        padding: 1.5rem;
+
+        h1 {
+          font-size: 1.8rem;
+        }
+
+        .build-class {
+          font-size: 1.1rem;
+        }
+      }
+    }
+
+    .equipment-section,
+    .skillgems-section {
+      margin-top: 0.75rem;
+    }
+
+    .back-button {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.9rem;
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .build-details {
+    padding: 0.5rem;
+
+    .build-header {
+      .build-image {
+        height: 200px;
+      }
+
+      .build-meta {
+        padding: 1rem;
+
+        h1 {
+          font-size: 1.4rem;
+        }
+
+        .build-class {
+          font-size: 1rem;
+        }
+      }
+    }
+
+    .equipment-section,
+    .skillgems-section {
+      margin-top: 0.5rem;
+    }
+  }
+}

@@ -1,0 +1,34 @@
+<div class="container my-4">
+  <div #carouselRoot class="carousel slide">
+    <div class="carousel-indicators">
+  @for (slide of slides(); track slide.id; let i = $index) {
+        <button
+          type="button"
+          data-bs-target=""
+          [attr.data-bs-slide-to]="i"
+          [class.active]="$first">
+        </button>
+      }
+    </div>
+
+    <div class="carousel-inner">
+  @for (slide of slides(); track slide.id; let i = $index) {
+        <div class="carousel-item" [class.active]="$first">
+          <img [src]="slide.image" class="d-block w-100" [alt]="slide.title || ('slide ' + (i + 1))">
+          @if (captionTemplate()) {
+            <div class="carousel-caption d-none d-md-block">
+              <ng-container *ngTemplateOutlet="captionTemplate(); context: { $implicit: slide }"></ng-container>
+            </div>
+          }
+        </div>
+      }
+    </div>
+
+    <button class="carousel-control-prev" type="button" (click)="prev()">
+      <span class="carousel-control-prev-icon"></span>
+    </button>
+    <button class="carousel-control-next" type="button" (click)="next()">
+      <span class="carousel-control-next-icon"></span>
+    </button>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="equipment-wrapper">
+  <div class="equipment-grid">
+    @for (slot of canonicalSlots(); track slot.id) {
+      <div class="slot" 
+           [attr.data-slot]="slot.id" 
+           [style.grid-area]="slot.id"
+           (mouseenter)="onSlotHover($event, slot)"
+           (mouseleave)="onSlotLeave()"
+           (mousemove)="onSlotMouseMove($event)">
+        
+        @if (slot.item) {
+          @if (slot.item.icon) {
+            <img [src]="getItemIconPath(slot.item.icon)" [alt]="slot.item.name" class="icon" />
+          } @else {
+            <div class="placeholder">{{ slot.item.name }}</div>
+          }
+        } @else {
+          <span class="label">{{ slot.name }}</span>
+        }
+      </div>
+    }
+  </div>
+</div>
+

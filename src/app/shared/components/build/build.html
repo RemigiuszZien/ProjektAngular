@@ -1,0 +1,58 @@
+<div class="modal-backdrop show">
+  <div class="modal d-block" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">{{ build()?.name }}</h5>
+          <button
+            type="button"
+            class="btn-close"
+            (click)="close.emit()"
+          ></button>
+        </div>
+        <div class="modal-body">
+          @if (build()?.equipment?.length) {
+            <div class="mb-3">
+              <strong>Wyposażenie:</strong>
+              <app-equipment-grid [slots]="equipment()"></app-equipment-grid>
+            </div>
+          }
+          @if (build()?.skillgems?.length) {
+            <div class="mt-3">
+              <div class="d-flex flex-wrap gap-3 mt-2">
+                @for (gem of build()?.skillgems ?? []; track gem.name) {
+                  <div class="d-flex align-items-center rounded px-2 py-1 skill-gem-row">
+                    @if (gem.icon) {
+                      <img
+                        [ngSrc]="gem.icon"
+                        width="32"
+                        height="32"
+                        alt="{{ gem.name }}"
+                        class="me-2 skill-gem-icon"
+                      />
+                    } @else {
+                      <div class="me-2 d-flex align-items-center justify-content-center skill-gem-placeholder">
+                        {{ gem.name.slice(0,2).toUpperCase() }}
+                      </div>
+                    }
+                    <div class="lh-1">
+                      <span class="fw-bold text-light skill-gem-name">{{ gem.name }}</span>
+                      <span class="ms-1 text-light-50">({{ gem.level }})</span>
+                      @if (gem.quality) { <span class="ms-1 text-success">+{{ gem.quality }}%</span> }
+                      @if (gem.type === 'support') { <span class="badge bg-info ms-1">Support</span> }
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+          }
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" (click)="close.emit()">
+            Zamknij
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

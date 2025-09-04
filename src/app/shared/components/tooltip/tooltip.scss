@@ -1,0 +1,62 @@
+:host {
+  position: fixed;
+  z-index: 10000;
+  pointer-events: none;
+}
+
+.tooltip-content {
+  background: #1a1a1a;
+  color: white;
+  padding: 12px 16px;
+  border: 2px solid #444;
+  border-radius: 8px;
+  min-width: 280px;
+  max-width: 350px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.item-name {
+  font-weight: bold;
+  margin-bottom: 6px;
+  font-size: 1.1rem;
+  text-shadow: 0 0 4px currentColor;
+  
+  &.rarity-normal { color: var(--rarity-normal, #c8c8c8); }
+  &.rarity-magic { color: var(--rarity-magic, #8888ff); }
+  &.rarity-rare { color: var(--rarity-rare, #ffff77); }
+  &.rarity-unique { color: var(--rarity-unique, #af6025); }
+  &.empty { color: var(--text-secondary); }
+}
+
+.item-rarity {
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+  text-transform: capitalize;
+  font-style: italic;
+  font-size: 0.85rem;
+}
+
+.item-base-type {
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  font-size: 0.85rem;
+}
+
+.stats-container {
+  border-top: 1px solid #444;
+  padding-top: 10px;
+  margin-top: 10px;
+}
+
+.stat {
+  margin-bottom: 4px;
+  color: var(--stat-default, #87cefa);
+  font-size: 0.85rem;
+  text-transform: capitalize;
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

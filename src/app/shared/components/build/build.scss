@@ -1,0 +1,41 @@
+
+%scrollable-container {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+%interactive-row {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background: #f8fafc;
+  }
+}
+
+.build-items-list {
+  @extend %scrollable-container;
+}
+
+.item-row {
+  @extend %interactive-row;
+}
+
+.modal-content {
+  background: var(--surface-secondary);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-large);
+  color: var(--text-primary);
+  opacity: 1;
+}
+
+.modal-backdrop.show {
+  background: var(--surface-dark);
+  opacity: 0.95;
+  backdrop-filter: blur(2px);
+  z-index: 1050;
+}
+
+.modal {
+  z-index: 1060;
+}

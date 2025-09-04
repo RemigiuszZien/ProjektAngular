@@ -1,0 +1,47 @@
+<div class="builds-list">
+  <button class="btn btn-secondary mb-3" (click)="goBack()">&larr; Powrót</button>
+  
+  <div class="builds-header">
+    <div>
+      <label for="class-select">Wybierz klasę:</label>
+      <select #classSelect id="class-select" [value]="selectedClassValue()" (change)="onClassChange($event)" class="form-select">
+        <option value="">Wszystkie klasy</option>
+        @for (className of availableClasses; track className) {
+          <option [value]="className">{{ className }}</option>
+        }
+      </select>
+    </div>
+    <h2>
+      @if (selectedClass()) {
+        Buildy dla klasy: {{ selectedClass() }}
+      } @else {
+        Wszystkie buildy
+      }
+    </h2>
+  </div>
+  
+  @if (loading()) {
+    <app-loading-spinner message="Ładowanie buildów..."></app-loading-spinner>
+  } @else if (error()) {
+    <div class="error-message">
+      <p>Błąd: {{ error() }}</p>
+      <button class="btn btn-primary" (click)="retryLoad()">Spróbuj ponownie</button>
+    </div>
+  } @else if (builds().length === 0) {
+    <p>Brak buildów dla tej klasy.</p>
+  } @else {
+    <div class="builds-grid">
+      @for (build of builds(); track build.id) {
+        <div class="build-card" (click)="goToBuild(build.id)">
+          <div>
+            <img [src]="getBuildImage(build.id)" [alt]="build.name" loading="lazy">
+          </div>
+          <div>
+            <h3>{{ build.name }}</h3>
+            <p>{{ build.class }}</p>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

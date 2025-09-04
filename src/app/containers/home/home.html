@@ -1,0 +1,14 @@
+<app-carousel
+  [slides]="slides"
+  [captionTemplate]="captionTpl"
+></app-carousel>
+
+<ng-template #captionTpl let-slide>
+  <h5>{{ slide.title }}</h5>
+  <p>{{ slide.text }}</p>
+  <button class="btn btn-primary" (click)="showBuilds(slide)">
+    Pokaż buildy
+  </button>
+</ng-template>
+
+

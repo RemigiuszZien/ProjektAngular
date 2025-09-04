@@ -1,0 +1,36 @@
+<div class="skill-gems">
+  @if (skillgems() && skillgems()!.length > 0) {
+    <h3>Skill Gems</h3>
+    <div class="gems-grid">
+      @for (gem of skillgems(); track gem.name) {
+        <div class="gem-card" [class]="getGemTypeClass(gem) + ' ' + getLinkClass(gem)">
+          <div class="gem-icon">
+            <img [src]="gem.icon" [alt]="gem.name" loading="lazy">
+            <div class="gem-level">{{ gem.level }}</div>
+          </div>
+          <div class="gem-info">
+            <h4 class="gem-name">{{ gem.name }}</h4>
+            <div class="gem-details">
+              <span class="gem-type">{{ gem.type | titlecase }}</span>
+              <span class="gem-quality" [class]="getQualityClass(gem.quality)">
+                Quality: {{ gem.quality }}%
+              </span>
+            </div>
+            @if (gem.links && gem.links.length > 0) {
+              <div class="gem-links">
+                <span class="links-label">Links:</span>
+                @for (link of gem.links; track link) {
+                  <span class="link-gem">{{ link }}</span>
+                }
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="no-gems">
+      <p>Brak skill gems w tym buildzie.</p>
+    </div>
+  }
+</div>
